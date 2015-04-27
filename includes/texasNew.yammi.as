@@ -655,3 +655,25 @@ public function askyammiAboutSex():void
 	clearMenu();
 	addButton(14,"Back",questionsForYammi);
 }
+
+//Yammi's Bad Day
+public function yammisbadday():void
+{
+	clearOutput();
+	output("You head over to Iced Teats, hoping for a quick snack to fill in a little time. As you approach, a small gang of lowlifes storm out. Several look disgruntled, the rest are laughing. You wait until they're gone, then head inside. Immediately you catch the sound of Yammi sniffling, trying not to cry. She's standing behind her cash register and is covered in ice cream! They must have thrown half a dozen bowls at her.");
+	output("\n\n<i>“I'm sorry. We're closed for the moment, I have to... Oh! It's you, hello…”</i> She chokes back a sob. <i>“Sorry, you kind of caught me at a bad moment.”</i>");
+	if(pc.isAss)) output("\n\nAs if it wasn't obvious.");
+	else output("\n\nYou can see that.");
+	output("You ask what happened, flipping the sign on the door around to 'Momentary Delay'. You note you saw the gaggle of troublemakers.");
+	output("\n\n<i>“Yeah, those guys are always a problem. They demand free stuff because they eat half their bowl and then decide they don't like that flavor, they scream and yell at me all the time... they're just really unpleasant people.”</i> She finally picks up a cloth and wipes her face off. <i>“Those are the kind of people that make me want to buy out my contract. Immediately. If it weren't for that kind of jerks, I'd probably be happy working here!”</i>");
+	output("\n\nYou ask if they're really common, as you pick up a cloth to help her wipe the counter. She nods. <i>“There's quite a few. Mostly young hotshots who know I can't do anything so they get away with acting like jerks, but there's a lot of people who just think they should be accommodated no matter how stupid their gripe is or whose fault it is.”</i> She chuckles a little. <i>“This one Deditonian woman we get in here is always trying to get her ice cream free because it's too cold. Really! Ice Cream, from the Iced Teats company, is too cold? I can't imagine why it isn't warmer, you know? And she'll sit here and look down her nose at me for half an hour sometimes and inform me that it's my job to please the customer and blah blah blah.”</i>");
+	output("\n\nYou ask her what she does? She smiles and hugs herself.");
+	output("\n\n<i>“I put up with it, of course. What else can I do? With her I usually just listen until her ice cream starts to melt, then point out it's warmed up for her. She usually gets insulted and tells my boss, so I get hit with a small fine. Again.”</i>");
+	output("\n\nYou offer to stick around and help clean up, but she shakes her head.");
+	output("\n\n<i>“Thank you, I appreciate it, but I'll get it. I could use a little time without customers to clear my head. I think I might just have a good cry and then open up again after I change.”</i>");
+	output("\n\nYou give her a reassuring smile, then head out, leaving her to catch her breath. You imagined customer service work could suck, but you didn't really think about how badly.");
+	flags["YAMMIS_BAD_DAY"] = 1
+	processTime(8);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
