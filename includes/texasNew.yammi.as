@@ -24,14 +24,14 @@ public function icedTreatsInterior():Boolean
 	//First Chance to Hire Yammi
 	if(flags["YAMMIS_BAD_DAY"] != undefined);
 	{
-	output("You stroll into Iced Teats looking for something tasty. You notice something's amiss when Yammi doesn't immediately greet you in her usual happy manner. Instead she is leaned on the counter looking glum, chin rested on her fist. You stroll over and inquire as to the source of her woes.");
-	output("\n\n<i>“My bosses have decided that since I get so many fines, they're upping my shelter and food bills, in any moment. It's going to double the cost of me getting out of here.”</i> She sighs and stands up, then shakes her head. <i>“I've tried telling them it's not my fault but they don't care. This is the second time they've done this to me! I'm starting to wonder if I'll ever get out of here.”</i>");
-	output("\n\nYou tell her to keep her hopes up, then ask how much she owes.");
-	output("\n\n<i>“Right now I owe 5000 credits. As soon they mail me, it'll basically be twice that. And I was so close! I could have been out of here in seven standard pay-cycles!”</i>");
-	clearMenu();
-	addButton(0,"Sympathy",sympathizeWithYammi);
-	if(pc.credits >= 5000) addButton(1,"BuyContract",payYammisContract);
-	else addDisabledButton(1,"BuyContract","BuyContract","You can't afford to pay that much.");
+		output("You stroll into Iced Teats looking for something tasty. You notice something's amiss when Yammi doesn't immediately greet you in her usual happy manner. Instead she is leaned on the counter looking glum, chin rested on her fist. You stroll over and inquire as to the source of her woes.");
+		output("\n\n<i>“My bosses have decided that since I get so many fines, they're upping my shelter and food bills, in any moment. It's going to double the cost of me getting out of here.”</i> She sighs and stands up, then shakes her head. <i>“I've tried telling them it's not my fault but they don't care. This is the second time they've done this to me! I'm starting to wonder if I'll ever get out of here.”</i>");
+		output("\n\nYou tell her to keep her hopes up, then ask how much she owes.");
+		output("\n\n<i>“Right now I owe 5000 credits. As soon they mail me, it'll basically be twice that. And I was so close! I could have been out of here in seven standard pay-cycles!”</i>");
+		clearMenu();
+		addButton(0,"Sympathy",sympathizeWithYammi);
+		if(pc.credits >= 5000) addButton(1,"BuyContract",payYammisContract);
+		else addDisabledButton(1,"BuyContract","BuyContract","You can't afford to pay that much.");
 	}
 	if(flags["MET_YAMMI"] == undefined)
 	{
@@ -692,7 +692,7 @@ public function yammisbadday():Boolean
 }
 
 //Sympathy
-public function sympathizeWithYammi:void()
+public function sympathizeWithYammi():void
 {
 	clearOutput();
 	output("You agree that seems really bad. With a faint grin you do mention that they clearly can't afford to lose her!");
@@ -707,7 +707,7 @@ public function sympathizeWithYammi:void()
 }
 
 //Pay It
-public function payYammisContract:void()
+public function payYammisContract():void
 {
 	clearOutput();
 	output("You tell her to grab her bag and lock up. You're going to cover that contract of hers.");
@@ -723,4 +723,80 @@ public function payYammisContract:void()
 	else pc.credits -= 5000
 	processTime(10);
 	addButton(0,"Next", welcomeToHellsKitchen);
+}
+
+//Kitchen Intro
+public function welcomeToHellsKitchen():void
+{
+	clearOutput();
+	currentLocation = "SHIP INTERIOR";
+	var map:* = mapper.generateMap(currentLocation);
+	userInterface.setMapData(map);
+	output("You stroll into the galley to see what Yammi's up to. She's busy setting the place up as she needs it, organizing spices and ingredients and figuring out the layout for everything. To your surprise, she's planning it all out so that everything can be locked down in a few moments, obviously having thought ahead some and not wanting to pick up a mess every time you get into a dogfight or have a rough landing. Yammi's 'bed' is near the entrance, a giant tank of water with a hammock in it. She herself is moving around dressed in little more than a high-legged bikini bottom, an apron, some modest high heels, and a pair of gloves. She doesn't notice you at first, so you get to watch her merrily skip around her new domain. Finally she turns enough to see you, and blushes furiously.");
+	output("\n\n<i>“Oh! Hi, Boss! I didn't see you there!”</i> She admits. <i>“I was just making sure everything's ready to go. We're all set up, and I've been coming up with a menu for you. Anything you need?”</i>");
+	output("\n\nYou assure her you're just here to see to her getting settled in.  She smiles.");
+	output("\n\n<i>“Yep, no problems here! We've got plenty of food, lots to drink, and I even made sure to squirrel away some snacks. Your utensils are okay for now, I'll pick more up as I need them.”</i>");
+	output("\n\nYou tell her to be sure that she mentions anything she needs.");
+	output("\n\n<i>“Sure thing, Boss! You just let me know if there's anything I can get for you!”</i> She manages an amateur salute, which");
+	if(pc.isAss) output("makes you raise an eyebrow.");
+	if(pc.isMischievous) output("makes you chuckle.");
+	else output("you don't let hanging and salute back.");
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Yammi in the Kitchen Main Menu
+public function yammiMainMenu():void
+{
+	clearOutput();
+	output("The kitchen's a busy place, with steam rising from boiling soups and hot food hissing as it is fried. A stove in back seems to be baking something. In the center of this storm of culinary chaos is Yammi, humming to herself and stirring, flipping, and chopping various foodstuffs, wearing nothing but an apron, gloves, and a bikini bottom. She smiles when she sees you.");
+	output("\n\n<i>“Heya, Boss! What's up?”</i> She inquires, setting down her spatula and turning the heat down so nothing burns. <i>“Can I get you anything?”</i>");
+	clearMenu();
+	addButton(0,"Talk",talkToYammi);
+	addButton(1,"Menu",eatYammisCooking);
+	addButton(2,"Help",helpYammi);
+	addButton(5,"Sex",eatYammisPussyHahahaImSoFunny);
+	addButton(14,"Leave",mainGameMenu);
+}
+
+//Talk Menu
+public function talkToYammi():void
+{
+	clearMenu();
+	addButton(0,"HerSpecie",aboutHerSpecie);
+	addButton(1,"HerChildhood",aboutHerChildhood);
+	addButton(2,"Cooking",aboutCooking);
+	addButton(14,"Back",yammiMainMenu);
+}
+
+//Helping Yammi
+//Need more scenes !!!
+public function helpYammi():void
+{
+	if(if(flags["HELPED_YAMMI"] == undefined) || if(flags["HELPED_YAMMI"] == 2))
+	{
+		flags["HELPED_YAMMI"] = 1;
+		helpYammiOne();
+	}
+	else if(flags["HELPED_YAMMI"] == 1;
+	{
+		flags["HELPED_YAMMI"] = 2;
+		helpYammiTwo();
+	}
+}
+
+//Yammi's Menu
+public function eatYammisCooking():void
+{
+	clearOutput();
+	output("<i>“Hungry, eh, Boss? Here ya go, this is what's on the skillet, so to speak!”</i> She hands you a menu and waits expectantly.");
+	clearMenu();
+	addButton(0,"Pepper Pie",orderPepperPie,"Pepper Pie","A special blend of hot and sweet peppers in a ground meat pie with fresh baked crust and rolls. Spicy!");
+	addButton(1,"Steak",orderSteak,"Steak","A side-cut steak from a Fruldian Meat-Animal.");
+	addButton(2,"Sweet Soup",orderSweetSoup,"Sweet Soup","A fruit and nut soup made in the milk of a coconut, chilled, and served as a drink.");
+	addButton(3,"Nobblur",orderNobblur,"Nobblur","Pastry filled with mixed veggies and cheese, ground meat, spices, and gravy. Served in a bowl with grains to soak up the mess.");
+	addButton(4,"Snack Tray",orderSnackTray,"Snack Tray","A big tray with finger foods of all sorts to munch on.");
+	addButton(5,"Fried Tulpe",orderFriedTulpe,"Fried Tulpe","A fried fish, imported from Yammi's home world and cooked in citrus fruit pulp. Served with a side of tubers.");
+	addButton(6,"Yammi's Sammich",orderYammisSammich,"Yammi's Sammich","A four foot long bread roll stuffed with a blend of spiced meat, seafood and cheese until it's about to explode, then baked.");
+	addButton(14,"Back",yammiMainMenu);
 }
