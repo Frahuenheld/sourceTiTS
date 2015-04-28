@@ -21,6 +21,18 @@ public function icedTreatsInterior():Boolean
 {
 	yammiShopDisplay();
 	showName("ICED\nTEATS");
+	//First Chance to Hire Yammi
+	if(flags["YAMMIS_BAD_DAY"] != undefined);
+	{
+	output("You stroll into Iced Teats looking for something tasty. You notice something's amiss when Yammi doesn't immediately greet you in her usual happy manner. Instead she is leaned on the counter looking glum, chin rested on her fist. You stroll over and inquire as to the source of her woes.");
+	output("\n\n<i>“My bosses have decided that since I get so many fines, they're upping my shelter and food bills, in any moment. It's going to double the cost of me getting out of here.”</i> She sighs and stands up, then shakes her head. <i>“I've tried telling them it's not my fault but they don't care. This is the second time they've done this to me! I'm starting to wonder if I'll ever get out of here.”</i>");
+	output("\n\nYou tell her to keep her hopes up, then ask how much she owes.");
+	output("\n\n<i>“Right now I owe 5000 credits. As soon they mail me, it'll basically be twice that. And I was so close! I could have been out of here in seven standard pay-cycles!”</i>");
+	clearMenu();
+	addButton(0,"Sympathy",sympathizeWithYammi);
+	if(pc.credits >= 5000) addButton(1,"BuyContract",payYammisContract);
+	else addDisabledButton(1,"BuyContract","BuyContract","You can't afford to pay that much.");
+	}
 	if(flags["MET_YAMMI"] == undefined)
 	{
 		flags["MET_YAMMI"] = 1;
@@ -61,6 +73,7 @@ public function yammiRepeatMenu(outputS:Boolean = true):void
 	if(pc.credits >= 50) addButton(2,"Feast",orderAYammiFeast,undefined,"Feast","Order a veritable feast of icecream. It only costs 50 credits - a huge savings, according to the menu.")
 	else addDisabledButton(2,"Feast","Feast","You can't afford the 50 credits a feast would cost.");
 	addButton(3,"Questions",questionsForYammi,undefined,"Questions","Strike up a conversation and ask her about some stuff.");
+	if(flags ["YAMMI_SYMPATHYZED"] != undefined) addButton(4,"BuyContract",payYammisContract);
 	addButton(14,"Back",mainGameMenu);
 }
 
@@ -657,7 +670,7 @@ public function askyammiAboutSex():void
 }
 
 //Yammi's Bad Day
-public function yammisbadday():void
+public function yammisbadday():Boolean
 {
 	clearOutput();
 	output("You head over to Iced Teats, hoping for a quick snack to fill in a little time. As you approach, a small gang of lowlifes storm out. Several look disgruntled, the rest are laughing. You wait until they're gone, then head inside. Immediately you catch the sound of Yammi sniffling, trying not to cry. She's standing behind her cash register and is covered in ice cream! They must have thrown half a dozen bowls at her.");
@@ -673,7 +686,41 @@ public function yammisbadday():void
 	output("\n\n<i>“Thank you, I appreciate it, but I'll get it. I could use a little time without customers to clear my head. I think I might just have a good cry and then open up again after I change.”</i>");
 	output("\n\nYou give her a reassuring smile, then head out, leaving her to catch her breath. You imagined customer service work could suck, but you didn't really think about how badly.");
 	flags["YAMMIS_BAD_DAY"] = 1
-	processTime(8);
+	processTime(7);
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
+}
+
+//Sympathy
+public function sympathizeWithYammi:void()
+{
+	clearOutput();
+	output("You agree that seems really bad. With a faint grin you do mention that they clearly can't afford to lose her!");
+	output("\n\n<i>“Yeah... well yeah. I guess. Still, this is no good. I want to get out there and see something other than this shop. I mean... I owe them, that's fair, but if they keep pulling this whenever I get close, I'm seriously going to flip out at some point!”</i>");
+	output("\n\nYou know it's not fair. Still, you assure her that it will all work out. After all, she has her faithful customers. You assure her that the tips won't stop from you at least.");
+	output("\n\n<i>“That's true! Alright, enough of me feeling sorry for myself.”</i> She puts on a smile. <i>“So! Welcome to Iced Teats! What can I get you today?”</i>");
+	output("\n\nSuddenly, her codex chirps announcing a new message. Poor girl.");
+	flags["YAMMI_SYMPATHYZED"] = 1
+	clearMenu();
+	processTime(2);
+	addButton(0,"Next",yammiRepeatMenu);
+}
+
+//Pay It
+public function payYammisContract:void()
+{
+	clearOutput();
+	output("You tell her to grab her bag and lock up. You're going to cover that contract of hers.");
+	output("\n\n<i>“I appreciate the sentiment, but... wait, really?!”</i> She looks stunned when you nod. Speechless, she jumps the counter and hugs you tightly, then looks around at the shop. <i>“Okay um... just give me a moment! Help yourself to some ice cream, I have a couple things to shut down and a bag to grab and I'll be right back!”</i>");
+	output("\n\nYou idly sample some flavors while she's gone, and you suspect the girls in the machines know she's leaving. Most look happy, some look a bit sad and many give you thankful looks. Only a few are upset, but you chalk that up to jealousy. Finally, Yammi comes back to the front, locking the back door behind her.");
+	output("\n\n<i>“My ex-owners are really angry. I don't care though!”</i> She laughs, then hugs your arm. <i>“Okay! Where to, Boss? Your ship has a kitchen, right? Galley? Whatever it's called? I can cook; I promise you won't regret this!”</i>");
+	output("\n\nYou inquire if she isn't perhaps interested in her freedom instead of latching onto you so quickly. She kisses you on the cheek.");
+	output("\n\n<i>“You have a ship.  That means you're going all over the place. Don't tell me you couldn't use a fresh made hot meal! And don't worry, I have basic self defense training, in case of robbery! And If we get boarded, I'll just duck into my water tank and turn it really cold, it slows my life signs down to undetectable levels.”</i> She insists, picking up her bag of clothes and whatever personal effects she has. <i>“I won't be in your way and I won't charge you anything for the services. I promise! Besides, I can breathe underwater. I can be useful finding things!”</i>");
+	output("\n\nYou shrug. If she wants to come with, you can't imagine it will hurt. And it might be nice to have an actual meal prepared for you once in a while. You agree.");
+	output("\n\n<i>“You won't regret this! I promise! Let's go, Boss, I have to make sure the kitchen's all stocked up before we go anywhere!”</i> She locks the front door behind you and then slides the keycard back under the door.");
+	clearMenu();
+	if(flags ["YAMMI_SYMPATHYZED"] != undefined) pc.credits -= 10000
+	else pc.credits -= 5000
+	processTime(10);
+	addButton(0,"Next", welcomeToHellsKitchen);
 }
