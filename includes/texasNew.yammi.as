@@ -741,6 +741,7 @@ public function welcomeToHellsKitchen():void
 	if(pc.isAss) output("makes you raise an eyebrow.");
 	if(pc.isMischievous) output("makes you chuckle.");
 	else output("you don't let hanging and salute back.");
+	processTime(9);
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
 }
@@ -799,4 +800,167 @@ public function eatYammisCooking():void
 	addButton(5,"Fried Tulpe",orderFriedTulpe,"Fried Tulpe","A fried fish, imported from Yammi's home world and cooked in citrus fruit pulp. Served with a side of tubers.");
 	addButton(6,"Yammi's Sammich",orderYammisSammich,"Yammi's Sammich","A four foot long bread roll stuffed with a blend of spiced meat, seafood and cheese until it's about to explode, then baked.");
 	addButton(14,"Back",yammiMainMenu);
+}
+
+//Talk - Her Species
+public function aboutHerSpecie():void
+{
+	clearOutput();
+	output("You grab a seat and tell her you'd like to have a few words with her about herself. She nods and continues working. <i>“Of course, Boss! Ask me anything!”</i>");
+	output("\n\nNaturally you start with her. Specifically, you ask what she can tell you about her kind.");
+	output("\n\n<i>“Oh, right! I never filled you in about us. Keep in mind I was raised apart from my kin, but I did a lot of research. I'm a Sparadat. We're from a hot world with all sorts of shallow-water stretches and rocky terrain. I think I mentioned we're amphibians?”</i> She glances over to you, and you nod for her to continue. <i>“My race have live births like most humanoids. We also have a highly developed sense of smell and taste; I think that's why I became such a fussy cook!”</i> She laughs.");
+	output("\n\nMakes sense. She pauses to get a few things moved around in their pans, then starts cutting up some vegetables.");
+	output("\n\n<i>“So, we live for a long while, but nobody's sure how long. Our world doesn't have enough on it to really catch most people's interest. No major wealth, just us. So we've kind of slipped through the cracks of the galaxy, and I think most Sparadat are pretty good with that. Still, someone had use for a couple of us, or I wouldn't be out here. I just hope my ancestors were adventurous, not captured specimens!”</i>");
+	output("\n\nYou decide to switch topics before she thinks too hard on that, and ask about how her people fare on their world.");
+	output("\n\n<i>“Oh, they're top of the food chain. Most of the water is only as deep as about twice my height. The few places it gets really deep have big fish, but since my kind are poisonous to most native critters, they don't bother us. I think that's why we have such bright colors, to alert other creatures we're dangerous to eat.”</i> She scoops the cut veggies into a pot and stirs it for a second. Then a flash of realization crosses her face and she hurries to add: <i>“By the way, just for your peace of mind and all, we're not poisonous to humanoids! You know, so you're not worried I might kill you while cooking or anything!”</i>");
+	output("\n\nYou breathe out a sigh of relief. The thought had crossed your mind. You both have a quick nervous laugh, then she hands you a small plate with several fresh buns on it.");
+	output("\n\n<i>“Not to tell you your job, but hadn't you better make sure everything's good at the helm from time to time? Besides, I'm really going to be cranking up the heat in here in a minute.”</i>");
+	output("\n\nYou thank her for the warning and take your snack to go.");
+	processTime(12);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Talk - Childhood
+public function aboutHerChildhood():void
+{
+	clearOutput();
+	output("\n\nYou lean on the edge of the counter and ask Yammi if she's got a minute. She nods and runs something through a blender. When the noise cuts out, you inquire about how she was raised.");
+	output("\n\n<i>“Hm? Well, I guess not much different from most people. I mean, there was a lot more focus on company loyalty and all that, but we got a decent education about how things work. I learned the bare bones of galactic navigation and stuff in case I got used as a server on a ship, picked up a bunch of basic chatter in several languages, there was a ton of phys-ed…”</i> She sighs as she mixes something with the blended substance. <i>“It was a nice time. Then they got into training us and we started getting all rebellious and adolescent, and boy! I earned myself more than a few wallops across the arse.”</i>");
+	output("\n\nYou express some disbelief that she could be a troublemaker, considering the things you've seen her put up with. She just laughs.");
+	output("\n\n<i>“Oh, you wouldn't believe the things I did! Cooking and chemistry are related and I used to find all sorts of ways to blow things up or stain things. I only got caught once in a while though. Lucky me! They weren't above locking us in little boxes to force us to think about how terrible we were, if they felt we needed a time out.”</i>");
+	output("\n\nYou assure her that she's safe from that kind of treatment around here. She smiles to you and finishes mixing whatever she's been making.");
+	output("\n\n<i>“Thanks, Boss! Here, taste this, see what you think.”</i>");
+	output("\n\nShe feeds you a spoonful of what appears to be red scrambled eggs. The taste isn't bad... for a second. Then, your stomach heaves and you grab the trash can. Alarmed, she holds ");
+	if(pc.hairLenght < 4) output("your head up ");
+	else output("your hair out of your face ");
+	output("and waits for you to finish clearing out your lunch. When you can, you ask her what was that");
+	if(pc.isAss()) output(" shit");
+	output(".");
+	output("\n\n<i>“That");
+	if(pc.isAss) output("...");
+	output(" was the last time I listen to an article saying something very, very healthy is 'a little bit unappealing to some', Boss. I'm so sorry!”</i> She hugs you gently, then helps you upright. <i>“Tell you what, you go sit down a minute, and I'll get you something to settle your stomach!”</i>");
+	output("\n\nYou catch your breath, then with a chuckle you note that if she doesn't want you asking about her school days, just has to say so!");
+	output("\n\n<i>“Har-Dee-Har-Har, Boss.”</i> She shakes her head and points, sending you from her kitchen. At least the milkshake she sends you later settles your stomach nicely!");
+	processTime(15);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Talk - Cooking
+public function aboutCooking():void
+{
+	clearOutput();
+	output("You stroll into the kitchen to find your cook finishing the latest batch of dishes. She glances over to you and smiles. You give her a hand putting some things away, noting that she loves to cook way more than you really thought possible.");
+	output("\n\n<i>“I guess. Never really thought about it. I just like to cook! It's something I'm good at, and with all the flavors I got to try around the ice cream shop it just made sense to look for more. What can I say, I'm glad my metabolism is insanely fast compared to most species', or I'd be a blimp!”</i>");
+	output("\n\nYou note you're not complaining, since you're getting most of the benefit. It does dawn on you to inquire about how she got to learn so much about culinary arts as a cashier.");
+	output("\n\n<i>“Oh, that. Yeah, they didn't have a lot to throw at me at first, so I saved up tips and bought access to some awesome info-casts about cooking. Just ran them through the store receiver and listened to them when there were no customers. Then they got the idea to maybe open a company restaurant, so I volunteered to work there and studied like a madwoman.”</i> She sighs heavily and shrugs. </i>“The idea went blooey, but I got my hands on more recipes and the like. The other girls I occasionally worked with were happy to try my experiments, and when there was nobody else I'd feed it to the spare ice cream girls.”</i>");
+	output("\n\nYou chuckle at the mental image of the girls trapped in the ice cream machines, being spoon-fed her latest experiment. Rather mad-scientist like! Yammi's face goes a deeper orange as she huffs out a peevish breath.");
+	output("\n\n<i>“I'll have you know those girls appreciated something with a little flavor as often as they could get it!”</i> She snaps in irritation. <i>“Evidently a little more than a certain wise-cracking captain does!”</i>");
+	output("\n\nWorried that you might lose snacking privileges, ");
+	if(pc.isNice) output("you hug and kiss her on the cheek, ");
+	if(pc.isMischievous) output("you throw her into a quick headlock and tousle her hair, ");
+	else output("you raise your hands and apologize, ");
+	output("reminding her you're very happy to have her and letting her know you're just kidding around. She rolls her eyes.");
+	output("\n\n<i>“Yeah yeah. If you really appreciate the effort, maybe you could get me a new set of knives, or some new dishes. Ooooh, how about a Kazimsta Roast-pit? They use collected solar radiation to flash-cook things; it'd be really quick. They're not too expensive!”</i>");
+	output("\n\nYou swallow a lump in your throat and note that you've seen those things before, and that the phrase <i>not too expensive</i> needs to drop the first word. Last time you saw one it was priced at something like half a ship.");
+	output("\n\n<i>“Fine!”</i> She sticks her tongue out like a little kid. <i>“You could at least show up before I finish the dishes next time!”</i>");
+	output("\n\nYou make no promises as something alerts you that you should be on the bridge. Hopefully just some stellar debris, but it's a good way to duck out of dishpan hands!");
+	processTime(9);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Pepper Pie
+public function orderPepperPie():void
+{
+	clearOutput();
+	pc.energy(15);
+	output("The pie is about as big around as the plate it's served on, three inches tall, and smells plenty spicy.  There are four rolls to go with it. Yammi watches you from nearby as you dig in, taking an experimental bite. It's exploding with strong flavors, mostly bold hot ones with an undertone of sweetness. You finish the first quarter before the slow-building heat catches up to you. You wolf down one of the buns and gesture to Yammi, who quickly hands you a mixed drink of something creamy. It quenches the burn down to a light throb.");
+	output("\n\n<i>“You okay, Boss?”</i> Yammi inquires, worried. <i>“I didn't make it too hot, did I?”</i>");
+	output("\n\nYou answer her with a grin and immediately begin to chow down again. It's absolutely fantastic, you just have to indulge in a drink from time to time to control the burn! It takes you about ten minutes to wolf down the whole thing, then you decide you'd better get back to work. Yammi seems pleased you liked it.");
+	output("\n\nOddly, you feel like the meal digests away quickly.  It seems Yammi's got your weight on her mind.");
+	processTime(10);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Steak
+public function orderSteak():void
+{
+	clearOutput();
+	pc.energy(20);
+	pc.thickness += (2);
+	output("Who doesn't love a good steak? You take your seat and wait. A few minutes later Yammi rolls out the biggest hunk of meat you've ever laid eyes on. It's more than two feet across and over an inch thick, marbled with enough fat to make sure the meat is tender and juicy. She has to bring it out on a cart, still sizzling.");
+	output("\n\n<i>“Here ya go, Boss! Take what you like and I'll use the rest for steaks and sandwiches later!”</i> She giggles, and you slice yourself a big hunk off to enjoy.");
+	output("\n\nIt tastes an awful lot like beef. Well, what can you say? It's about the best steak you've had in a long time! You can tell it was grilled on an open flame, and it's been given just a hint of spice. You consider yourself one lucky explorer to be getting fresh barbecued steaks in the middle of space!");
+	processTime(9);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Sweet Soup
+public function orderSweetSoup():void
+{
+	clearOutput();
+	pc.energy(10);
+	pc.thickness += (1);
+	output("You decide on something sweet. Yammi pours you a frothy white liquid from a pitcher and tops it with a couple flakes of shaved nuts, then presents it to you with a big straw. The drink is served in a glass that sits on the floor and stands over three feet tall, but is very narrow.");
+	output("\n\n<i>“Traditional serving glass.”</i> Yammi explains as you sip at it. <i>“The race that made the recipe are really tall but very skinny so they don't eat much. I had to modify the mix a lot since their foods tend to be deadly to most life, but I think I got the essence of it!”</i>");
+	output("\n\nWell, it's certainly sweet! A nutty-creamy blend of taste that would be perfect for any dessert. You're not complaining, until you realize you've downed it so fast that you're getting a headache. Yammi giggles and hugs you, chiding you for being such an overeager little kid with the sugary stuff. On the upside, she informs you that all the sugars are natural and so they won't make you fat as long as you exercise.");
+	processTime(7);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Nobblur
+public function orderNobblur():void
+{
+	clearOutput();
+	pc.energy(15);
+	pc.thickness += (3);
+	output("Yammi puts a big bowl in front of you, and there it is, a pastry dome full of greatness. You pick it up, take a bite, and immediately spill warm gravy back into the bowl where dark grains are waiting to soak it up. It's a wave of different flavors with every bite, and you enjoy each one. It's also a very heavy meal, and you have to pause halfway through. Yammi chuckles to herself as she watches you power through it, then she grabs a spoon.");
+	output("\n\n<i>“Don't worry, Boss, I'll snack on the grains.”</i> She offers, helping you to your feet. <i>“You go have a sit down and let that settle!”</i>");
+	output("\n\nYou agree that after a nobblur, it's probably best to take things slow. You go to put your feet up in your favorite chair.");
+	processTime(12);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Snack Tray
+public function orderSnackTray():void
+{
+	clearOutput();
+	pc.energy(15);
+	output("Yammi takes about ten minutes to put together a sampler from all the things she's got on the go. You are amazed at the tray's layout, snacks spiraling out from the dip trays in the middle. Cut fruit, fresh veggies, nuts, pastries, pasta, finger sized meat cuts, small fish samples, chips, and more. It's less a meal than a munch-fest, and you and Yammi both contribute to the demise of the mighty snack tray. Fifteen minutes later you excuse yourself with a smaller tray of leftovers to go do your rounds. There's just so many things to eat!");
+	processTime(15);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Fried Tulpe
+public function orderFriedTulpe():void
+{
+	clearOutput();
+	pc.energy(25);
+	output("Yammi presents to you a specialty of her species. It's a golden-brown fried fish fillet. It's also almost a foot long. The spud-like tubers served with it are an appetizing baked red. You dig in, and find that it's a little bland but very filling. The tubers are nice and soft.  It's very much a proper home-cooked meal, in space, far from home. You feel pretty good about your mission, as a little twinge of homesickness you were unaware of goes away for a while.");
+	output("\n\n<i>“Hope you enjoyed it, Boss. It's one of my favorite, for obvious reasons.”</i> She smiles. <i>“I stock quite a few tulpe. I know, plain, but they're quite healthy, I assure you!”</i>");
+	processTime(8);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Yammi's Sammich
+public function orderYammisSammich():void
+{
+	clearOutput();
+	pc.energy(20);
+	pc.thickness += (3);
+	output("Yammi rolls out a trolley with a four foot long monster of a sandwich on it. It smells of cooked meat and fish, and practically oozes with cheese. You're stunned at the sight of this monster.");
+	output("\n\n<i>“My favorite!”</i> She giggles. <i>“Of course I usually eat one over the entire day, but it's not like I can't just hack a piece off and eat on the run, which is what makes it so nice.”</i>");
+	output("\n\nYou measure out a good chunk to slice off and dig in. The meat and seafood don't blend as smoothly as you might have thought, but they complement each other well at least, and the cheese she used is different from others you've tried before. You greedily devour the whole thing in a couple minutes, to Yammi's delight.");
+	output("\n\n<i>“Now, don't eat too many of these! They're a bit heavy for your kind, Boss!”</i> She cautions you, rolling the rest back to its storage space.");
+	processTime(4);
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
 }
