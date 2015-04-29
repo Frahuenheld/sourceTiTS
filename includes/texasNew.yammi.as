@@ -738,8 +738,8 @@ public function welcomeToHellsKitchen():void
 	output("\n\n<i>“Yep, no problems here! We've got plenty of food, lots to drink, and I even made sure to squirrel away some snacks. Your utensils are okay for now, I'll pick more up as I need them.”</i>");
 	output("\n\nYou tell her to be sure that she mentions anything she needs.");
 	output("\n\n<i>“Sure thing, Boss! You just let me know if there's anything I can get for you!”</i> She manages an amateur salute, which");
-	if(pc.isAss) output("makes you raise an eyebrow.");
-	if(pc.isMischievous) output("makes you chuckle.");
+	if(pc.isAss()) output("makes you raise an eyebrow.");
+	if(pc.isMischievous()) output("makes you chuckle.");
 	else output("you don't let hanging and salute back.");
 	processTime(9);
 	clearMenu();
@@ -838,7 +838,7 @@ public function aboutHerChildhood():void
 	if(pc.isAss()) output(" shit");
 	output(".");
 	output("\n\n<i>“That");
-	if(pc.isAss) output("...");
+	if(pc.isAss()) output("...");
 	output(" was the last time I listen to an article saying something very, very healthy is 'a little bit unappealing to some', Boss. I'm so sorry!”</i> She hugs you gently, then helps you upright. <i>“Tell you what, you go sit down a minute, and I'll get you something to settle your stomach!”</i>");
 	output("\n\nYou catch your breath, then with a chuckle you note that if she doesn't want you asking about her school days, just has to say so!");
 	output("\n\n<i>“Har-Dee-Har-Har, Boss.”</i> She shakes her head and points, sending you from her kitchen. At least the milkshake she sends you later settles your stomach nicely!");
@@ -858,8 +858,8 @@ public function aboutCooking():void
 	output("\n\nYou chuckle at the mental image of the girls trapped in the ice cream machines, being spoon-fed her latest experiment. Rather mad-scientist like! Yammi's face goes a deeper orange as she huffs out a peevish breath.");
 	output("\n\n<i>“I'll have you know those girls appreciated something with a little flavor as often as they could get it!”</i> She snaps in irritation. <i>“Evidently a little more than a certain wise-cracking captain does!”</i>");
 	output("\n\nWorried that you might lose snacking privileges, ");
-	if(pc.isNice) output("you hug and kiss her on the cheek, ");
-	if(pc.isMischievous) output("you throw her into a quick headlock and tousle her hair, ");
+	if(pc.isNice()) output("you hug and kiss her on the cheek, ");
+	if(pc.isMischievous()) output("you throw her into a quick headlock and tousle her hair, ");
 	else output("you raise your hands and apologize, ");
 	output("reminding her you're very happy to have her and letting her know you're just kidding around. She rolls her eyes.");
 	output("\n\n<i>“Yeah yeah. If you really appreciate the effort, maybe you could get me a new set of knives, or some new dishes. Ooooh, how about a Kazimsta Roast-pit? They use collected solar radiation to flash-cook things; it'd be really quick. They're not too expensive!”</i>");
@@ -964,3 +964,4 @@ public function orderYammisSammich():void
 	clearMenu();
 	addButton(0,"Next",mainGameMenu);
 }
+
