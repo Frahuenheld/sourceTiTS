@@ -206,11 +206,11 @@ public function crew(counter:Boolean = false):Number {
 		count++;
 		if(!counter)
 		{
-			addButton(count-1,"Reaha",approachShipBoardReahaWhyDidntSavinCodeThisHeWasntExhaustedYesterday);
+			addButton(count - 1,"Reaha",approachShipBoardReahaWhyDidntSavinCodeThisHeWasntExhaustedYesterday);
 			crewMessages += "\n\nReaha is currently meandering around the ship, arms clutched under her hefty bosom, her nipples hooked up to a small portable milker.";
 		}
 	}
-	if (annoIsCrew())
+	if(annoIsCrew())
 	{
 		count++;
 		if (!counter)
@@ -219,6 +219,15 @@ public function crew(counter:Boolean = false):Number {
 			if (hours >= 6 && hours <= 7 || hours >= 19 && hours <= 20) crewMessages += "\n\nAnno is walking about in her quarters, sorting through her inventory and organizing some of her equipment.";
 			else if (hours >= 12 || hours <= 13) crewMessages += "\n\nAnno's busy doing a quick workout in her quarters to the beat of some fast-paced ausar heavy metal. <i>“Gotta keep in shape!”</i> she says.";
 			else crewMessages += "\n\nAnno is sitting in the common area with her nose buried in half a dozen different data slates. It looks like she's splitting her attention between the latest Warp Gate research and several different field tests of experimental shield generators.";
+		}
+	}
+	if(yammiIsCrew())
+	{
+		count++;
+		if(!counter)
+		{
+			addButton(count - 1,"Yammi",yammiMainMenu);
+			crewMessages += "\n\nA delicious smell and the sounds of pans on the stove and a knife cutting the ingredients for a future meal are the only signs you need to know Yammi's working hard as always. Maybe you could go in and taste something. You are the captain after all!";
 		}
 	}
 	if(!counter) {
