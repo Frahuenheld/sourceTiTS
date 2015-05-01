@@ -4,9 +4,28 @@
 //Since Yammi can be removed from the shop later, making this so I only have to change stuff once.
 public function yammiShopDisplay():void
 {
-	showName("\nYAMMI");
-	showBust("YAMMI");
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		showName("\nYAMMI");
+		showBust("YAMMI");
+	}
+	else
+	{
+		showName("\nSALIRE");
+	}
 	author("Lady Jenn");
+}
+
+public function yammiIsCrew():Boolean
+{
+	if(flags["YAMMI_HAS_JOINED"] == 1) return true;
+	return false;
+}
+
+public function yammiIsNotCrew():Boolean
+{
+	if(flags["YAMMI_HAS_JOINED"] == undefined) return true;
+	return false;
 }
 
 public function icedTeatsExteriorBonusFunc():Boolean
@@ -28,20 +47,32 @@ public function icedTreatsInterior():Boolean
 		output("\n\n<i>“My bosses have decided that since I get so many fines, they're upping my shelter and food bills, in any moment. It's going to double the cost of me getting out of here.”</i> She sighs and stands up, then shakes her head. <i>“I've tried telling them it's not my fault but they don't care. This is the second time they've done this to me! I'm starting to wonder if I'll ever get out of here.”</i>");
 		output("\n\nYou tell her to keep her hopes up, then ask how much she owes.");
 		output("\n\n<i>“Right now I owe 5000 credits. As soon they mail me, it'll basically be twice that. And I was so close! I could have been out of here in seven standard pay-cycles!”</i>");
+		processTime(3);
 		clearMenu();
 		addButton(0,"Sympathy",sympathizeWithYammi);
 		if(pc.credits >= 5000) addButton(1,"BuyContract",payYammisContract);
 		else addDisabledButton(1,"BuyContract","BuyContract","You can't afford to pay that much.");
 	}
-	if(flags["MET_YAMMI"] == undefined)
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		output("You head into the Iced Teats shop, looking to enjoy something cool and delicious. When you enter, a blue skinned woman with black hair smiles at you, her light blue vest barely holding her bulging d-cup breasts in place. She greets you with the familiar <i>“Welcome to Iced Teats!  My name is Salire, what can I get for you today?”</i> She has the eager happiness of someone new to their job and looking to make a good impression.");
+		output("\n\n<i>“Cone, Bowl, or Feast?”</i> She inquires pleasantly.");
+		processTime(1);
+		clearMenu();
+		if(pc.credits >= 10) addButton(0,"Cone",orderAYammiCone,undefined,"Cone","Order a cone for the low low price of 10 credits.");
+		else addDisabledButton(0,"Cone","Cone","You can't afford the 10 credits for a cone.");
+		if(pc.credits >= 20) addButton(1,"Bowl",orderAYammiBowl,undefined,"Bowl","Order a bowl for the not so low price of 20 credits.");
+		else addDisabledButton(1,"Bowl","Bowl","You can't afford the 20 credit cost of a bowl of titty-milk icecream. How sad.");
+		if(pc.credits >= 50) addButton(2,"Feast",orderAYammiFeast,undefined,"Feast","Order a veritable feast of icecream. It only costs 50 credits - a huge savings, according to the menu.")
+		else addDisabledButton(2,"Feast","Feast","You can't afford the 50 credits a feast would cost.");
+		addButton(14,"Back",mainGameMenu);
+	}
+	if(flags["MET_YAMMI"] == undefined);
 	{
 		flags["MET_YAMMI"] = 1;
 		output("The shop interior is made up of row after row of clear plastic devices with trays in front for bowls, and handles to draw the ice cream treats. On taking a second look, you realize each one appears to be occupied by a female form! Before you can make much of this, your attention is called to the right, where the cashier calls to you.");
-
 		output("\n\n<i>“Hello! Welcome to Iced Teats!”</i>");
-
 		output("\n\nThis tall orange skinned woman has short lime green hair and bright red eyes. She wears a bright red miniskirt and vest combo that she must have to squeeze her C-cups into with a shoehorn. Her eye shadow, nail polish, and lipstick all share the hue of her hair. Her ears are bony fans, her fingers webbed, and she has gill slits on her neck, betraying an amphibious origin. Her smile is inviting and warm as you step up to the counter.");
-
 		output("\n\n<i>“My name is Yammi! What can I get for you today?”</i> She chirps happily, indicating the large flavor list behind her. <i>“We have cones, bowls, or frozen feasts, in any combination of flavors you prefer!”</i>");
 		processTime(1);
 		//(Options include ‘Cone’, ‘Bowl’, ‘Feast’, ‘Questions’, and ‘Back’, with back leaving the store)
@@ -100,7 +131,16 @@ public function orderAYammiCone():void
 	clearOutput();
 	yammiShopDisplay();
 	pc.credits -= 10;
-	output("<i>“Just a taste today? Certainly! Here you are!”</i> With a flourish, Yammi produces a deep cone made of red-brown wafer. <i>“Our cones are 100% natural nutrients healthy for any carbon based life form and easily digestible for silicates!”</i>");
+	output("<i>“Just a taste today? Certainly! Here you are!”</i> With a flourish, ");
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		output("Yammi ");
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		output("Salire ");
+	}
+	output("produces a deep cone made of red-brown wafer. <i>“Our cones are 100% natural nutrients healthy for any carbon based life form and easily digestible for silicates!”</i>");
 	preparingToGetIceCream("cone");
 }
 
@@ -110,7 +150,16 @@ public function orderAYammiBowl():void
 	clearOutput();
 	yammiShopDisplay();
 	pc.credits -= 20;
-	output("\n\n<i>“A hearty appetite, I see!”</i> Yammi smiles and hands you a black bowl and spoon. <i>“Here you are. When you’re done, just toss those out. They automatically break down to simple particles in 48 hours so they don’t pollute!”</i>");
+	output("\n\n<i>“A hearty appetite, I see!”</i> ");
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		output("Yammi ");
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		output("Salire ");
+	}
+	output("smiles and hands you a black bowl and spoon. <i>“Here you are. When you’re done, just toss those out. They automatically break down to simple particles in 48 hours so they don’t pollute!”</i>");
 	preparingToGetIceCream("bowl");
 }
 
@@ -120,7 +169,16 @@ public function orderAYammiFeast():void
 	clearOutput();
 	yammiShopDisplay();
 	pc.credits -= 50;
-	output("<i>“As you wish! Here you go!”</i> Yammi pulls a tray with three bowl-like depressions in it from beneath the counter. <i>“Mix and match to your heart’s content, and you can keep the tray for use at home! Careful you don’t get a headache though!”</i> She giggles.");
+	output("<i>“As you wish! Here you go!”</i> ");
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		output("Yammi ");
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		output("Salire ");
+	}
+	output("pulls a tray with three bowl-like depressions in it from beneath the counter. <i>“Mix and match to your heart’s content, and you can keep the tray for use at home! Careful you don’t get a headache though!”</i> She giggles.");
 	preparingToGetIceCream("feast");
 }
 
@@ -248,7 +306,14 @@ public function getYokto(servingType:String = "cone"):void
 		pc.energy(25);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Blitzaberry
@@ -297,7 +362,14 @@ public function blitzaberryCone(servingType:String = "cone"):void
 		pc.energy(75);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Strawberry
@@ -355,7 +427,14 @@ public function strawberryIcedCream(servingType:String = "cone"):void
 		pc.energy(25);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Jumbijumbi
@@ -407,7 +486,14 @@ public function JumbijumbiCream(servingType:String = "cone"):void
 		pc.energy(9);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Darginut
@@ -462,7 +548,14 @@ public function darginutIcedCream(servingType:String = "cone"):void
 		pc.energy(20);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Chocolate
@@ -520,7 +613,14 @@ public function chocolateIcedCream(servingType:String = "cone"):void
 		pc.energy(25);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 //Flameberks
@@ -578,7 +678,14 @@ public function flameberksIcedCream(servingType:String = "cone"):void
 		pc.energy(9);
 	}
 	clearMenu();
-	addButton(0,"Next",yammiRepeatMenu,true);
+	if(flags["YAMMI_HAS_JOINED"] == undefined);
+	{
+		addButton(0,"Next",yammiRepeatMenu,true);
+	}
+	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	{
+		addButton(0,"Next",icedTreatsInterior);
+	}
 }
 
 public function askYammiAbootIceCream():void
@@ -673,6 +780,7 @@ public function askyammiAboutSex():void
 public function yammisbadday():Boolean
 {
 	clearOutput();
+	yammiShopDisplay();
 	output("You head over to Iced Teats, hoping for a quick snack to fill in a little time. As you approach, a small gang of lowlifes storm out. Several look disgruntled, the rest are laughing. You wait until they're gone, then head inside. Immediately you catch the sound of Yammi sniffling, trying not to cry. She's standing behind her cash register and is covered in ice cream! They must have thrown half a dozen bowls at her.");
 	output("\n\n<i>“I'm sorry. We're closed for the moment, I have to... Oh! It's you, hello…”</i> She chokes back a sob. <i>“Sorry, you kind of caught me at a bad moment.”</i>");
 	if(pc.isAss)) output("\n\nAs if it wasn't obvious.");
@@ -695,6 +803,7 @@ public function yammisbadday():Boolean
 public function sympathizeWithYammi():void
 {
 	clearOutput();
+	yammiShopDisplay();
 	output("You agree that seems really bad. With a faint grin you do mention that they clearly can't afford to lose her!");
 	output("\n\n<i>“Yeah... well yeah. I guess. Still, this is no good. I want to get out there and see something other than this shop. I mean... I owe them, that's fair, but if they keep pulling this whenever I get close, I'm seriously going to flip out at some point!”</i>");
 	output("\n\nYou know it's not fair. Still, you assure her that it will all work out. After all, she has her faithful customers. You assure her that the tips won't stop from you at least.");
@@ -710,6 +819,9 @@ public function sympathizeWithYammi():void
 public function payYammisContract():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("You tell her to grab her bag and lock up. You're going to cover that contract of hers.");
 	output("\n\n<i>“I appreciate the sentiment, but... wait, really?!”</i> She looks stunned when you nod. Speechless, she jumps the counter and hugs you tightly, then looks around at the shop. <i>“Okay um... just give me a moment! Help yourself to some ice cream, I have a couple things to shut down and a bag to grab and I'll be right back!”</i>");
 	output("\n\nYou idly sample some flavors while she's gone, and you suspect the girls in the machines know she's leaving. Most look happy, some look a bit sad and many give you thankful looks. Only a few are upset, but you chalk that up to jealousy. Finally, Yammi comes back to the front, locking the back door behind her.");
@@ -732,6 +844,9 @@ public function welcomeToHellsKitchen():void
 	currentLocation = "SHIP INTERIOR";
 	var map:* = mapper.generateMap(currentLocation);
 	userInterface.setMapData(map);
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("You stroll into the galley to see what Yammi's up to. She's busy setting the place up as she needs it, organizing spices and ingredients and figuring out the layout for everything. To your surprise, she's planning it all out so that everything can be locked down in a few moments, obviously having thought ahead some and not wanting to pick up a mess every time you get into a dogfight or have a rough landing. Yammi's 'bed' is near the entrance, a giant tank of water with a hammock in it. She herself is moving around dressed in little more than a high-legged bikini bottom, an apron, some modest high heels, and a pair of gloves. She doesn't notice you at first, so you get to watch her merrily skip around her new domain. Finally she turns enough to see you, and blushes furiously.");
 	output("\n\n<i>“Oh! Hi, Boss! I didn't see you there!”</i> She admits. <i>“I was just making sure everything's ready to go. We're all set up, and I've been coming up with a menu for you. Anything you need?”</i>");
 	output("\n\nYou assure her you're just here to see to her getting settled in.  She smiles.");
@@ -750,6 +865,9 @@ public function welcomeToHellsKitchen():void
 public function yammiMainMenu():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("The kitchen's a busy place, with steam rising from boiling soups and hot food hissing as it is fried. A stove in back seems to be baking something. In the center of this storm of culinary chaos is Yammi, humming to herself and stirring, flipping, and chopping various foodstuffs, wearing nothing but an apron, gloves, and a bikini bottom. She smiles when she sees you.");
 	output("\n\n<i>“Heya, Boss! What's up?”</i> She inquires, setting down her spatula and turning the heat down so nothing burns. <i>“Can I get you anything?”</i>");
 	clearMenu();
@@ -763,6 +881,9 @@ public function yammiMainMenu():void
 //Talk Menu
 public function talkToYammi():void
 {
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	clearMenu();
 	addButton(0,"HerSpecie",aboutHerSpecie);
 	addButton(1,"HerChildhood",aboutHerChildhood);
@@ -790,6 +911,9 @@ public function helpYammi():void
 public function eatYammisCooking():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("<i>“Hungry, eh, Boss? Here ya go, this is what's on the skillet, so to speak!”</i> She hands you a menu and waits expectantly.");
 	clearMenu();
 	addButton(0,"Pepper Pie",orderPepperPie,"Pepper Pie","A special blend of hot and sweet peppers in a ground meat pie with fresh baked crust and rolls. Spicy!");
@@ -806,6 +930,9 @@ public function eatYammisCooking():void
 public function aboutHerSpecie():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("You grab a seat and tell her you'd like to have a few words with her about herself. She nods and continues working. <i>“Of course, Boss! Ask me anything!”</i>");
 	output("\n\nNaturally you start with her. Specifically, you ask what she can tell you about her kind.");
 	output("\n\n<i>“Oh, right! I never filled you in about us. Keep in mind I was raised apart from my kin, but I did a lot of research. I'm a Sparadat. We're from a hot world with all sorts of shallow-water stretches and rocky terrain. I think I mentioned we're amphibians?”</i> She glances over to you, and you nod for her to continue. <i>“My race have live births like most humanoids. We also have a highly developed sense of smell and taste; I think that's why I became such a fussy cook!”</i> She laughs.");
@@ -825,6 +952,9 @@ public function aboutHerSpecie():void
 public function aboutHerChildhood():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("\n\nYou lean on the edge of the counter and ask Yammi if she's got a minute. She nods and runs something through a blender. When the noise cuts out, you inquire about how she was raised.");
 	output("\n\n<i>“Hm? Well, I guess not much different from most people. I mean, there was a lot more focus on company loyalty and all that, but we got a decent education about how things work. I learned the bare bones of galactic navigation and stuff in case I got used as a server on a ship, picked up a bunch of basic chatter in several languages, there was a ton of phys-ed…”</i> She sighs as she mixes something with the blended substance. <i>“It was a nice time. Then they got into training us and we started getting all rebellious and adolescent, and boy! I earned myself more than a few wallops across the arse.”</i>");
 	output("\n\nYou express some disbelief that she could be a troublemaker, considering the things you've seen her put up with. She just laughs.");
@@ -851,6 +981,9 @@ public function aboutHerChildhood():void
 public function aboutCooking():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	output("You stroll into the kitchen to find your cook finishing the latest batch of dishes. She glances over to you and smiles. You give her a hand putting some things away, noting that she loves to cook way more than you really thought possible.");
 	output("\n\n<i>“I guess. Never really thought about it. I just like to cook! It's something I'm good at, and with all the flavors I got to try around the ice cream shop it just made sense to look for more. What can I say, I'm glad my metabolism is insanely fast compared to most species', or I'd be a blimp!”</i>");
 	output("\n\nYou note you're not complaining, since you're getting most of the benefit. It does dawn on you to inquire about how she got to learn so much about culinary arts as a cashier.");
@@ -875,6 +1008,9 @@ public function aboutCooking():void
 public function orderPepperPie():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(15);
 	output("The pie is about as big around as the plate it's served on, three inches tall, and smells plenty spicy.  There are four rolls to go with it. Yammi watches you from nearby as you dig in, taking an experimental bite. It's exploding with strong flavors, mostly bold hot ones with an undertone of sweetness. You finish the first quarter before the slow-building heat catches up to you. You wolf down one of the buns and gesture to Yammi, who quickly hands you a mixed drink of something creamy. It quenches the burn down to a light throb.");
 	output("\n\n<i>“You okay, Boss?”</i> Yammi inquires, worried. <i>“I didn't make it too hot, did I?”</i>");
@@ -889,6 +1025,9 @@ public function orderPepperPie():void
 public function orderSteak():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(20);
 	pc.thickness += (2);
 	output("Who doesn't love a good steak? You take your seat and wait. A few minutes later Yammi rolls out the biggest hunk of meat you've ever laid eyes on. It's more than two feet across and over an inch thick, marbled with enough fat to make sure the meat is tender and juicy. She has to bring it out on a cart, still sizzling.");
@@ -903,6 +1042,9 @@ public function orderSteak():void
 public function orderSweetSoup():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(10);
 	pc.thickness += (1);
 	output("You decide on something sweet. Yammi pours you a frothy white liquid from a pitcher and tops it with a couple flakes of shaved nuts, then presents it to you with a big straw. The drink is served in a glass that sits on the floor and stands over three feet tall, but is very narrow.");
@@ -917,6 +1059,9 @@ public function orderSweetSoup():void
 public function orderNobblur():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(15);
 	pc.thickness += (3);
 	output("Yammi puts a big bowl in front of you, and there it is, a pastry dome full of greatness. You pick it up, take a bite, and immediately spill warm gravy back into the bowl where dark grains are waiting to soak it up. It's a wave of different flavors with every bite, and you enjoy each one. It's also a very heavy meal, and you have to pause halfway through. Yammi chuckles to herself as she watches you power through it, then she grabs a spoon.");
@@ -931,6 +1076,9 @@ public function orderNobblur():void
 public function orderSnackTray():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(15);
 	output("Yammi takes about ten minutes to put together a sampler from all the things she's got on the go. You are amazed at the tray's layout, snacks spiraling out from the dip trays in the middle. Cut fruit, fresh veggies, nuts, pastries, pasta, finger sized meat cuts, small fish samples, chips, and more. It's less a meal than a munch-fest, and you and Yammi both contribute to the demise of the mighty snack tray. Fifteen minutes later you excuse yourself with a smaller tray of leftovers to go do your rounds. There's just so many things to eat!");
 	processTime(15);
@@ -942,6 +1090,9 @@ public function orderSnackTray():void
 public function orderFriedTulpe():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(25);
 	output("Yammi presents to you a specialty of her species. It's a golden-brown fried fish fillet. It's also almost a foot long. The spud-like tubers served with it are an appetizing baked red. You dig in, and find that it's a little bland but very filling. The tubers are nice and soft.  It's very much a proper home-cooked meal, in space, far from home. You feel pretty good about your mission, as a little twinge of homesickness you were unaware of goes away for a while.");
 	output("\n\n<i>“Hope you enjoyed it, Boss. It's one of my favorite, for obvious reasons.”</i> She smiles. <i>“I stock quite a few tulpe. I know, plain, but they're quite healthy, I assure you!”</i>");
@@ -954,6 +1105,9 @@ public function orderFriedTulpe():void
 public function orderYammisSammich():void
 {
 	clearOutput();
+	showName("\nYAMMI");
+	showBust("YAMMI");
+	author("Lady Jenn");
 	pc.energy(20);
 	pc.thickness += (3);
 	output("Yammi rolls out a trolley with a four foot long monster of a sandwich on it. It smells of cooked meat and fish, and practically oozes with cheese. You're stunned at the sight of this monster.");
@@ -965,3 +1119,20 @@ public function orderYammisSammich():void
 	addButton(0,"Next",mainGameMenu);
 }
 
+//Help 1
+public function helpYammiOne():void
+{
+	clearOutput();
+	output("I still have to do this because I'm a lazy bitch.");
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
+
+//Help 2
+public function helpYammiTwo():void
+{
+	clearOutput();
+	output("I still have to do this because I'm a lazy bitch.");
+	clearMenu();
+	addButton(0,"Next",mainGameMenu);
+}
