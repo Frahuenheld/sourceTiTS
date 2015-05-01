@@ -783,7 +783,7 @@ public function yammisbadday():Boolean
 	yammiShopDisplay();
 	output("You head over to Iced Teats, hoping for a quick snack to fill in a little time. As you approach, a small gang of lowlifes storm out. Several look disgruntled, the rest are laughing. You wait until they're gone, then head inside. Immediately you catch the sound of Yammi sniffling, trying not to cry. She's standing behind her cash register and is covered in ice cream! They must have thrown half a dozen bowls at her.");
 	output("\n\n<i>“I'm sorry. We're closed for the moment, I have to... Oh! It's you, hello…”</i> She chokes back a sob. <i>“Sorry, you kind of caught me at a bad moment.”</i>");
-	if(pc.isAss)) output("\n\nAs if it wasn't obvious.");
+	if(pc.isAss()) output("\n\nAs if it wasn't obvious.");
 	else output("\n\nYou can see that.");
 	output("You ask what happened, flipping the sign on the door around to 'Momentary Delay'. You note you saw the gaggle of troublemakers.");
 	output("\n\n<i>“Yeah, those guys are always a problem. They demand free stuff because they eat half their bowl and then decide they don't like that flavor, they scream and yell at me all the time... they're just really unpleasant people.”</i> She finally picks up a cloth and wipes her face off. <i>“Those are the kind of people that make me want to buy out my contract. Immediately. If it weren't for that kind of jerks, I'd probably be happy working here!”</i>");
@@ -834,7 +834,7 @@ public function payYammisContract():void
 	if(flags ["YAMMI_SYMPATHYZED"] != undefined) pc.credits -= 10000
 	else pc.credits -= 5000
 	processTime(10);
-	addButton(0,"Next", welcomeToHellsKitchen);
+	addButton(0,"Next",welcomeToHellsKitchen);
 }
 
 //Kitchen Intro
@@ -895,12 +895,12 @@ public function talkToYammi():void
 //Need more scenes !!!
 public function helpYammi():void
 {
-	if(if(flags["HELPED_YAMMI"] == undefined) || if(flags["HELPED_YAMMI"] == 2))
+	if(if(flags["HELPED_YAMMI"] == undefined) || if(flags["HELPED_YAMMI"] == 2));
 	{
 		flags["HELPED_YAMMI"] = 1;
 		helpYammiOne();
 	}
-	else if(flags["HELPED_YAMMI"] == 1;
+	else if(flags["HELPED_YAMMI"] == 1);
 	{
 		flags["HELPED_YAMMI"] = 2;
 		helpYammiTwo();
