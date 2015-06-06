@@ -136,7 +136,7 @@ public function orderAYammiCone():void
 	{
 		output("Yammi ");
 	}
-	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	else
 	{
 		output("Salire ");
 	}
@@ -155,7 +155,7 @@ public function orderAYammiBowl():void
 	{
 		output("Yammi ");
 	}
-	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	else
 	{
 		output("Salire ");
 	}
@@ -174,7 +174,7 @@ public function orderAYammiFeast():void
 	{
 		output("Yammi ");
 	}
-	if(flags["YAMMI_HAS_JOINED"] != undefined);
+	else
 	{
 		output("Salire ");
 	}
