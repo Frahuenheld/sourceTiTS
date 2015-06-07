@@ -51,6 +51,7 @@
 	import classes.Items.Apparel.*
 	import classes.Items.Miscellaneous.*
 	import classes.Items.Accessories.*
+	import classes.Items.Transformatives.*;
 
 	import classes.Parser.ParseEngine;
 
@@ -67,6 +68,7 @@
 	import classes.Engine.Combat.*;
 	import classes.Engine.Interfaces.*;
 	import classes.Engine.Map.*;
+	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	import flash.events.UncaughtErrorEvent;
 	import flash.events.UncaughtErrorEvents;
@@ -108,6 +110,7 @@
 		include "../includes/travelEvents.as";
 		include "../includes/travelEvents.fallOfThePhoenix.as";
 		include "../includes/travelEvents.kiroRescue.as";
+		include "../includes/travelEvents.kiro.as";
 		
 		// Holiday Events
 		include "../includes/event.puppyslutmas.as";
@@ -121,6 +124,7 @@
 		include "../includes/tavros.sellesy.as";
 		include "../includes/tavros.sera.as";
 		include "../includes/tavros.shelly.as";
+		include "../includes/tavros.vahn.as";
 		
 		//First planet
 		include "../includes/mhenga.burt.as";
@@ -137,6 +141,7 @@
 		include "../includes/mhenga.roomFunctions.as";
 		include "../includes/mhenga.scrapyard.as";
 		include "../includes/mhenga.syri.as";
+		include "../includes/mhenga.tanis.as";
 		include "../includes/mhenga.vanae.as";
 		include "../includes/mhenga.venusPitchers.as";
 		include "../includes/mhenga.vko.as";
@@ -176,14 +181,18 @@
 		include "../includes/texasNew.zephyr.as";
 		
 		//Fourth planet
+		include "../includes/myrellion.bathHouse.as";
 		include "../includes/myrellion.cockvines.as";
 		include "../includes/myrellion.cockvineseedling.as";
+		include "../includes/myrellion.dally.as";
 		include "../includes/myrellion.embassy.as";
 		include "../includes/myrellion.embry.as";
+		include "../includes/myrellion.genesmods.as";
 		include "../includes/myrellion.irellia.as";
 		include "../includes/myrellion.irelliaQuest.as";
 		include "../includes/myrellion.kaede.as";
 		include "../includes/myrellion.karaAndShade.as";
+		include "../includes/myrellion.kressiaSurvivalShop.as";
 		include "../includes/myrellion.landmines.as";
 		include "../includes/myrellion.lieve.as";
 		include "../includes/myrellion.liliana.as";
@@ -195,7 +204,9 @@
 		include "../includes/myrellion.renvra.as";
 		include "../includes/myrellion.rooms.as";
 		include "../includes/myrellion.roomFunctions.as";
+		include "../includes/myrellion.steph.as";
 		include "../includes/myrellion.tavern.as";
+		include "../includes/myrellion.tradingPost.as";
 		include "../includes/myrellion.wetraxxel.as";
 		include "../includes/myrellion.xanthe.as";
 		
@@ -206,6 +217,16 @@
 		public var days:int;
 		public var hours:int;
 		public var minutes:int;
+		
+		// Get a 'packed' version of the current in-game time. Useful for date/time passage comparisons stored in flags.
+		public function GetGameTimestamp():uint
+		{
+			var value:uint = 0;
+			value += minutes;
+			value += hours * 60;
+			value += days * 24 * 60;
+			return value;
+		}
 
 		// Queued event system
 		public var eventBuffer:String;
@@ -281,7 +302,7 @@
 
 			trace("TiTS Constructor")
 
-			version = "0.5.28";
+			version = "0.5.42";
 
 			//temporary nonsense variables.
 			temp = 0;
@@ -1005,6 +1026,14 @@
 		public function get lane():Lane
 		{
 			return chars["LANE"];
+		}
+		public function get anarrie():Anarrie
+		{
+			return chars["ANARRIE"];
+		}
+		public function get goo():gooArmor
+		{
+			return chars["GOO"];
 		}
 	}
 }
