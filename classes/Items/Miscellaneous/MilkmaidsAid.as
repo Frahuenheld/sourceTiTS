@@ -41,6 +41,8 @@
 			//Information
 			this.basePrice = 10;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -48,6 +50,7 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, 0, 0);
 			
 			this.version = _latestVersion;
 		}
@@ -66,7 +69,7 @@
 				if(!target.canLactate())
 				{
 					kGAMECLASS.output("You pop the bottle open and tap a few of the milk-colored pills into your hand. Before you consume them, however, you take a peek at the health and safety warnings, which tells you that there’s no known effect on persons not currently lactatings. You’d better start lactating before you fill up on it.");
-					if(!kGAMECLASS.infiniteItems()) quantity++;
+					if(!kGAMECLASS.debug) quantity++;
 				}
 				//Use, PC is lactating
 				else

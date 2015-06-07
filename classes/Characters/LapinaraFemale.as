@@ -27,14 +27,15 @@
 			this.customBlock = "Somehow, the attack doesn't penetrate the lapinara's fur!";
 			this.customDodge = "The lapinara uses its small size to slip out of the way.";
 			this.plural = false;
+			this.lustVuln = 1;
 			
-			meleeWeapon.baseDamage.kinetic.damageValue = 2;
+			this.meleeWeapon.damage = 2;
 			this.meleeWeapon.attack = 0;
 			this.meleeWeapon.longName = "fist";
 			this.meleeWeapon.attackVerb = "punch";
 			this.meleeWeapon.hasRandomProperties = true;
 			
-			rangedWeapon.baseDamage.kinetic.damageValue = 1;
+			this.rangedWeapon.damage = 0;
 			this.rangedWeapon.attack = 0;
 			this.rangedWeapon.longName = "rock";
 			this.rangedWeapon.attackVerb = "smash";
@@ -55,7 +56,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 50;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 50;
 			this.level = 2;
 			this.credits = 25;

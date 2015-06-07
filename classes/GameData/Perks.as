@@ -61,11 +61,7 @@ package classes.GameData
 			tough.levelLimit = 3;
 			tough.autoGained = true;
 			tough.perkName = "Tough";
-			tough.perkDescription = "Resistance to Kinetic damage increased by 10%."
-			tough.applicationFunction = function():void {
-				kGAMECLASS.pc.baseHPResistances.kinetic.resistanceValue += 10.0;
-				kGAMECLASS.pc.baseShieldResistances.kinetic.resistanceValue += 10.0;
-			}
+			tough.perkDescription = "Vulnerability to piercing, slashing, and kinetic damage taken reduced by 10%.";
 			insertPerkData(tough);
 			
 			var powerStrike:PerkData = new PerkData();
@@ -125,7 +121,7 @@ package classes.GameData
 			detCharge.classLimit = GLOBAL.CLASS_MERCENARY;
 			detCharge.levelLimit = 5;
 			detCharge.perkName = "Detonation Charge";
-			detCharge.perkDescription = "Grants the ability to throw a focused detonation charge at an enemy for very high Burning damage. Focusing the charge restricts the blast radius to a single target.";
+			detCharge.perkDescription = "Grants the ability to throw a focused detonation charge at an enemy for very high thermal damage. Focusing the charge restricts the blast radius to a single target.";
 			insertPerkData(detCharge);
 
 			//Level 6
@@ -135,25 +131,21 @@ package classes.GameData
 			tough2.levelLimit = 6;
 			tough2.autoGained = true;
 			tough2.perkName = "Tough 2";
-			tough2.perkDescription = "Increases Kinetic damage resistance provided by 'Tough' to 15% (+5%).";
-			tough2.applicationFunction = function():void {
-				kGAMECLASS.pc.baseHPResistances.kinetic.resistanceValue += 5.0;
-				kGAMECLASS.pc.baseShieldResistances.kinetic.resistanceValue += 5.0;
-			}
+			tough2.perkDescription = "Upgrades the \"Tough\" ability from 10 to 15%.";
 			insertPerkData(tough2);
 
 			var lowTechSolutions:PerkData = new PerkData();
 			lowTechSolutions.classLimit = GLOBAL.CLASS_MERCENARY;
 			lowTechSolutions.levelLimit = 6;
 			lowTechSolutions.perkName = "Low Tech Solutions";
-			lowTechSolutions.perkDescription = "Increases damage from Kinetic melee weapons by 20%.";
+			lowTechSolutions.perkDescription = "Increases damage from kinetic, slashing, and piercing melee weapons by 20%.";
 			insertPerkData(lowTechSolutions);
 
 			var heavyWeapons:PerkData = new PerkData();
 			heavyWeapons.classLimit = GLOBAL.CLASS_MERCENARY;
 			heavyWeapons.levelLimit = 6;
 			heavyWeapons.perkName = "Heavy Weapons";
-			heavyWeapons.perkDescription = "Increases damage from Kinetic ranged weapons by 20%.";
+			heavyWeapons.perkDescription = "Increases damage from kinetic, slashing, and piercing ranged weapons by 20%.";
 			insertPerkData(heavyWeapons);
 
 			//Level 7
@@ -278,7 +270,7 @@ package classes.GameData
 			grenade.classLimit = GLOBAL.CLASS_SMUGGLER;
 			grenade.levelLimit = 5;
 			grenade.perkName = "Grenade";
-			grenade.perkDescription = "Grants the ability to throw a grenade designed to emit high levels of thermal radiation. Deals Burning damage to all enemies in combat.";
+			grenade.perkDescription = "Grants the ability to throw a grenade designed to emit high levels of thermal radiation. Deals Thermal damage to all enemies in combat.";
 			insertPerkData(grenade);
 
 			//Level 6
@@ -338,7 +330,7 @@ package classes.GameData
 			smuggledStimulant.classLimit = GLOBAL.CLASS_SMUGGLER;
 			smuggledStimulant.levelLimit = 7;
 			smuggledStimulant.perkName = "Smuggled Stimulant";
-			smuggledStimulant.perkDescription = "Allows you to gain 25 energy per round for 3 rounds, once per combat encounter.";
+			smuggledStimulant.perkDescription = "Allows you to gain 25 energy per round for 3 rounds, once per combat.";
 			insertPerkData(smuggledStimulant);
 			
 			//2. Burst of Energy: Gain 60 energy, once per combat.
@@ -346,7 +338,7 @@ package classes.GameData
 			burstOfEnergy.classLimit = GLOBAL.CLASS_SMUGGLER;
 			burstOfEnergy.levelLimit = 7;
 			burstOfEnergy.perkName = "Burst of Energy";
-			burstOfEnergy.perkDescription = "Allows you to recover 60 energy, once per combat encounter.";
+			burstOfEnergy.perkDescription = "Allows you to recover 60 energy, once per combat.";
 			insertPerkData(burstOfEnergy);
 
 		}
@@ -366,7 +358,7 @@ package classes.GameData
 			attackDrone.classLimit = GLOBAL.CLASS_ENGINEER;
 			attackDrone.levelLimit = 2;
 			attackDrone.perkName = "Attack Drone";
-			attackDrone.perkDescription = "Grants an attack drone that will automatically fire on your enemies every combat round as long as your shields are up. The drone will also bolster your shields with its own, raising your maximum shielding by one point per level.";
+			attackDrone.perkDescription = "Grants an attack drone that will automatically fire on your enemies every combat round as long as your shields are up. The drone will also supplant your shields with its own, raising your maximum shielding by one point per level.";
 			insertPerkData(attackDrone);
 			
 			var shieldBooster:PerkData = new PerkData();
@@ -435,14 +427,14 @@ package classes.GameData
 			gDisrupt.classLimit = GLOBAL.CLASS_ENGINEER;
 			gDisrupt.levelLimit = 5;
 			gDisrupt.perkName = "Gravidic Disruptor";
-			gDisrupt.perkDescription = "Grants the ability to deal Unresistable damage to targetted enemies.";
+			gDisrupt.perkDescription = "Grants the ability to deal Gravidic damage to targetted enemies. There shouldn't be anything out there that's resistant to gravitic damage!";
 			insertPerkData(gDisrupt);
 			
 			var tDisrupt:PerkData = new PerkData();
 			tDisrupt.classLimit = GLOBAL.CLASS_ENGINEER;
 			tDisrupt.levelLimit = 5;
 			tDisrupt.perkName = "Thermal Disruptor";
-			tDisrupt.perkDescription = "Grants the ability to deal Burning damage to your foes. Deals higher base damage than Gravidic Disruptor, but some enemies may be resistant to Burning damage.";
+			tDisrupt.perkDescription = "Grants the ability to deal Thermal damage to your foes. Deals higher base damage than Gravidic Disruptor, but some enemies may be resistant to Thermal damage.";
 			insertPerkData(tDisrupt);
 
 			//Level 6
@@ -578,37 +570,6 @@ package classes.GameData
 			});
 			
 			return filterPerks;
-		}
-		
-		private function getPerkDataByName(perkName:String):PerkData
-		{
-			var ff:Function = function(t_perkName:String):Function
-			{
-				return function(item:PerkData, index:int, vector:Vector.<PerkData>):Boolean
-				{
-					if (item.perkName == t_perkName) return true;
-					return false;
-				}
-			}(perkName);
-			
-			var filterPerks:Vector.<PerkData> = _perkList.filter(ff);
-			
-			if (filterPerks.length == 0) return null;
-			if (filterPerks.length == 1) return filterPerks[0];
-			
-			throw new Error("Found multiple perks for the provided search key! (" + perkName + ")");
-		}
-		
-		public function getDescriptionForPerk(perkName:String):String
-		{
-			var tPerk:PerkData = getPerkDataByName(perkName);
-			
-			if (tPerk == null)
-			{
-				return "";
-			}
-			
-			return tPerk.perkDescription;
 		}
 	}
 

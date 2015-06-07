@@ -40,6 +40,8 @@
 			//Information
 			this.basePrice = 2450;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -47,13 +49,14 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, 0, 0);
 			
 			this.version = _latestVersion;
 		}	
 		//METHOD ACTING!
 		override public function useFunction(target:Creature, usingCreature:Creature = null):Boolean
 		{
-			if(!kGAMECLASS.infiniteItems()) quantity++;
+			if(!kGAMECLASS.debug) quantity++;
 			if(target is PlayerCharacter) {
 				//Consume:
 				kGAMECLASS.joyCoMagicMilker7Sucks();

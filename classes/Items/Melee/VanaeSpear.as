@@ -4,7 +4,6 @@ package classes.Items.Melee
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
 	import classes.StringUtil;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	/**
 	 * ...
@@ -34,8 +33,8 @@ package classes.Items.Melee
 			
 			this.basePrice = 250;
 			this.attack = 2;
-			baseDamage.kinetic.damageValue = 8;
-			baseDamage.addFlag(DamageFlag.PENETRATING);
+			this.damage = 8;
+			this.damageType = GLOBAL.PIERCING;
 			
 			this.version = _latestVersion;	
 		}	

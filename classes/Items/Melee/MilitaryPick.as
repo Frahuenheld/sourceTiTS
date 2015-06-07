@@ -4,7 +4,6 @@
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
 	import classes.StringUtil;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	public class MilitaryPick extends ItemSlotClass
 	{
@@ -38,10 +37,8 @@
 			//Information
 			this.basePrice = 3000;
 			this.attack = -3;
-			
-			baseDamage.kinetic.damageValue = 14;
-			baseDamage.addFlag(DamageFlag.PENETRATING);
-			
+			this.damage = 14;
+			this.damageType = GLOBAL.PIERCING;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -49,6 +46,7 @@
 			this.critBonus = 5;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

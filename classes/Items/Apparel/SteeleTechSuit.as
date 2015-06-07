@@ -41,6 +41,8 @@ package classes.Items.Apparel
 			//Information
 			this.basePrice = 3500;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 15;
@@ -48,9 +50,7 @@ package classes.Items.Apparel
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
-			
-			resistances.electric.resistanceValue = 30.0;
-			resistances.burning.resistanceValue = 30.0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, -.3, -.3);
 			
 			this.version = _latestVersion;
 		}

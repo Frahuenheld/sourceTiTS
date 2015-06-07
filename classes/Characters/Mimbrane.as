@@ -1,10 +1,6 @@
 package classes.Characters 
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
-	
 	import classes.Creature;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.GLOBAL;
 	import classes.kGAMECLASS;
 	import classes.rand;
@@ -32,14 +28,12 @@ package classes.Characters
 			this.customBlock = "You’re shocked to see the parasite’s form adapt to your attack. It’s as if you’re attacking a bedsheet in a wind tunnel.";
 			this.plural = false;
 			
-			isLustImmune = true;
+			this.lustVuln = 0;
 			
 			this.meleeWeapon.attackVerb = "scratch";
-			
-			meleeWeapon.baseDamage.kinetic.damageValue = 4;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
-			
+			this.meleeWeapon.damageType = GLOBAL.PIERCING;
 			this.meleeWeapon.attack = 2;
+			this.meleeWeapon.damage = 4;
 			this.meleeWeapon.longName = "barbs";
 			this.meleeWeapon.hasRandomProperties = true;
 			
@@ -56,7 +50,7 @@ package classes.Characters
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 15;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1); // Supposedly resistant to "blunt" damage
 			this.XPRaw = 20;
 			this.level = 1;
 			this.credits = 0;

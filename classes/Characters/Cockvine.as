@@ -1,11 +1,7 @@
 ﻿package classes.Characters
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
-	
 	import classes.CockClass;
 	import classes.Creature;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.GLOBAL;
 	import classes.kGAMECLASS;
 	import classes.rand;
@@ -29,15 +25,12 @@
 			this.customDodge = "The cock vine sways aside at the last second!";
 			this.customBlock = "Your attack deflects off the cock vine's " + this.scaleColor + " scales!";
 			this.plural = false;
-			
-			isLustImmune = true;
+			this.lustVuln = 0;
 			
 			this.meleeWeapon.attackVerb = "lash";
+			this.meleeWeapon.damageType = GLOBAL.PIERCING;
 			this.meleeWeapon.attack = 2;
-			
-			meleeWeapon.baseDamage.kinetic.damageValue = 4;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
-			
+			this.meleeWeapon.damage = 4;
 			this.meleeWeapon.longName = "tendrils";
 			this.meleeWeapon.hasRandomProperties = true;
 			
@@ -54,11 +47,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 75;
-			
-			baseHPResistances = new TypeCollection();
-			baseHPResistances.kinetic.damageValue = 50.0;
-			baseHPResistances.burning.damageValue = -50.0;
-			
+			this.resistances = new Array(0.5, 1, 1, 1, 1, 1, 1, 1.5);
 			this.XPRaw = 250;
 			this.level = 6;
 			this.credits = 0;
@@ -188,7 +177,6 @@
 			var combatVine:Cockvine = this.makeCopy();
 
 			kGAMECLASS.foes.push(combatVine);
-			kGAMECLASS.userInterface.showBust("ADULTCOCKVINE");
 		}
 	}
 }

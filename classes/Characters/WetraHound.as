@@ -8,7 +8,6 @@
 	import classes.kGAMECLASS;
 	import classes.rand;
 	import classes.GameData.CodexManager;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	public class WetraHound extends Creature
 	{
@@ -29,12 +28,10 @@
 			this.customDodge = "Claws scrabbling, the wetra slips away from your attack.";
 			this.customBlock = "The hounds thick hide soak up your attack.";
 			this.plural = false;
-			isLustImmune = true;
-			
+			this.lustVuln = 0;
 			this.meleeWeapon = new Fists();
-			meleeWeapon.baseDamage.kinetic.damageValue = 8;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
 			this.meleeWeapon.attack = 8;
+			this.meleeWeapon.damage = 8;
 			this.meleeWeapon.longName = "claw";
 			this.meleeWeapon.attackVerb = "claw";
 			this.meleeWeapon.hasRandomProperties = true;
@@ -52,6 +49,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 0;
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 400;
 			this.level = 6;
 			this.credits = 0;

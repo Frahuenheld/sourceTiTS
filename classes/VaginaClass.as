@@ -7,12 +7,8 @@
 		//constructor
 		public function VaginaClass(vag:Boolean = true)
 		{
-			if(!vag) 
-			{
-				clits = 0;
-				wetnessRaw = 0;
-				hymen = false;
-			}
+			if(!vag) clits = 0;
+			hymen = false;
 		}
 		
 		//For cheateyness.

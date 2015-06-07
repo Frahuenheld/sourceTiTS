@@ -6,7 +6,6 @@ package classes.Items.Miscellaneous
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
 	import classes.kGAMECLASS;
-	import classes.Engine.Combat.applyDamage;
 	
 	/**
 	 * ...
@@ -39,12 +38,15 @@ package classes.Items.Miscellaneous
 			
 			this.basePrice = 100;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.ELECTRIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.sexiness = 0;
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, 0, 0);
 			
 			this.combatUsable = true;
 			this.targetsSelf = false;
@@ -111,7 +113,7 @@ package classes.Items.Miscellaneous
 			if (targetCreature == kGAMECLASS.pc) kGAMECLASS.output(" you!");
 			else kGAMECLASS.output(" " + targetCreature.short);
 			
-			applyDamage(this.baseDamage, usingCreature, targetCreature);
+			kGAMECLASS.genericDamageApply(this.damage, usingCreature, targetCreature, this.damageType);
 			
 			if (!targetCreature.hasStatusEffect("Blind"))
 			{

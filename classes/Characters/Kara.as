@@ -3,10 +3,9 @@
 	import classes.Creature;
 	import classes.GLOBAL;
 	import classes.Items.Protection.ReaperArmamentsMarkIIShield;
-	import classes.Items.Guns.FlareGun;
+	import classes.Items.Guns.ArcCaster;
 	import classes.Items.Apparel.GenericCatsuit;
 	import classes.kGAMECLASS;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	public class Kara extends Creature
 	{
@@ -26,9 +25,9 @@
 			this.customDodge = "Kara nimbly ducks aside!";
 			this.customBlock = "";
 			this.plural = false;
+			this.lustVuln = 1;
 			
-			meleeWeapon.baseDamage.kinetic.damageValue = 6;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
+			this.meleeWeapon.damage = 6;
 			this.meleeWeapon.attack = 2;
 			this.meleeWeapon.longName = "cutlass";
 			this.meleeWeapon.attackVerb = "slash";
@@ -36,8 +35,7 @@
 			
 			this.armor new GenericCatsuit();
 			
-			this.rangedWeapon = new FlareGun();
-			rangedWeapon.baseDamage.kinetic.damageValue = 12;
+			this.rangedWeapon = new ArcCaster();
 			this.rangedWeapon.longName = "plasma pistol";
 			this.rangedWeapon.attackVerb = "plasma";
 			this.rangedWeapon.hasRandomProperties = true;
@@ -52,13 +50,13 @@
 			this.libidoRaw = 70;
 			this.HPMod = 125;
 			this.shieldsRaw = this.shieldsMax();
+			this.HPRaw = this.HPMax();
 			this.energyRaw = 100;
 			this.lustRaw = 15;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 400;
 			this.level = 7;
 			this.credits = 0;
-			this.HPRaw = this.HPMax();
 			
 			this.femininity = 85;
 			this.eyeType = GLOBAL.TYPE_SYNTHETIC;

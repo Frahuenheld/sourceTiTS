@@ -4,7 +4,6 @@ package classes.Items.Melee
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
 	import classes.StringUtil;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	/**
 	 * ...
@@ -42,10 +41,8 @@ package classes.Items.Melee
 			//Information
 			this.basePrice = 0;
 			this.attack = 1;
-			
-			baseDamage.kinetic.damageValue = 8;
-			baseDamage.addFlag(DamageFlag.CRUSHING);
-			
+			this.damage = 8;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 2;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -53,6 +50,7 @@ package classes.Items.Melee
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

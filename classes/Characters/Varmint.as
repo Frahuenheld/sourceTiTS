@@ -8,7 +8,6 @@
 	import classes.kGAMECLASS;
 	import classes.rand;
 	import classes.GameData.CodexManager;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	//**************************************************
 	//Listed as chars["AUTOTURRETS"] in code elsewhere!
@@ -32,20 +31,16 @@
 			this.customDodge = "Claws scrabbling, the varmint slips away from your attack.";
 			this.customBlock = "The armor plates soak up your attack.";
 			this.plural = false;
-			isLustImmune = true;
-			
+			this.lustVuln = 0;
 			this.meleeWeapon = new Fists();
 			this.meleeWeapon.attack = 2;
-			meleeWeapon.baseDamage.kinetic.damageValue = 1;
-			meleeWeapon.addFlag(DamageFlag.PENETRATING);
+			this.meleeWeapon.damage = 1;
 			this.meleeWeapon.longName = "claw";
 			this.meleeWeapon.attackVerb = "claw";
 			this.meleeWeapon.hasRandomProperties = true;
-			
 			this.rangedWeapon.longName = "guns";
 			this.rangedWeapon.attack = -2;
-			rangedWeapon.baseDamage.kinetic.damageValue = 1;
-			rangedWeapon.baseDamage.addFlag(DamageFlag.BULLET);
+			this.rangedWeapon.damage = 1;
 			this.rangedWeapon.attackVerb = "shot";
 			this.rangedWeapon.hasRandomProperties = true;
 			
@@ -62,6 +57,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 0;
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 250;
 			this.level = 6;
 			this.credits = 0;

@@ -1,7 +1,5 @@
 ﻿package classes.Items.Melee
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	import classes.ItemSlotClass;
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
@@ -38,11 +36,8 @@
 			//Information
 			this.basePrice = 550;
 			this.attack = 0;
-			
-			baseDamage = new TypeCollection();
-			baseDamage.kinetic.damageValue = 8;
-			baseDamage.addFlag(DamageFlag.PENETRATING);
-			
+			this.damage = 8;
+			this.damageType = GLOBAL.SLASHING;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -50,6 +45,7 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

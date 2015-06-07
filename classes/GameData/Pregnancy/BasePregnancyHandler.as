@@ -57,9 +57,6 @@ package classes.GameData.Pregnancy
 		protected var _pregnancyQuantityMaximum:int;
 		public function get pregnancyQuantityMaximum():int { return _pregnancyQuantityMaximum; }
 		
-		protected var _pregnancyChildType:uint;
-		public function get pregnancyChildType():uint { return _pregnancyChildType; }
-		
 		public function BasePregnancyHandler() 
 		{
 			_debugTrace = true;
@@ -78,7 +75,6 @@ package classes.GameData.Pregnancy
 			_pregnancyQuantityMinimum = 1;
 			_pregnancyQuantityMaximum = 1;
 			_definedAverageLoadSize = 250;
-			_pregnancyChildType = GLOBAL.CHILD_TYPE_LIVE;
 			
 			_stageProgressions = new Array();
 			

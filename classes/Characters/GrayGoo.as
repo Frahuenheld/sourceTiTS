@@ -1,7 +1,6 @@
 ﻿package classes.Characters
 {
 	import classes.Creature;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.GLOBAL;
 	import classes.Items.Guns.*
 	import classes.Items.Melee.Fists;
@@ -27,6 +26,7 @@
 			this.customDodge = "The goo's body twists and morphs outlandishly to avoid your attack.";
 			this.customBlock = "The goo's remarkable composition somehow allows her to take your attack unharmed.";
 			this.plural = false;
+			this.lustVuln = 1;
 			this.meleeWeapon = new Fists();
 			
 			this.rangedWeapon.attack = 1;
@@ -47,10 +47,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 35;
-			
-			baseHPResistances = new TypeCollection();
-			baseHPResistances.kinetic.damageValue = 25.0;
-			
+			this.resistances = new Array(.75,.75,.75,1,1,1,1,1);
 			this.XPRaw = 225;
 			this.level = 4;
 			this.credits = 50;

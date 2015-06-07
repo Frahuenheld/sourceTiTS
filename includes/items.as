@@ -166,11 +166,6 @@ public function shop(keeper:Creature):void {
 		introductionToMerchantQueenSloot();
 		return;
 	}
-	else if(keeper is Seifyn)
-	{
-		repeatSeifynMeeting();
-		return;
-	}
 	clearOutput();
 	output(keeper.keeperGreeting);
 	shopkeep = keeper;
@@ -282,45 +277,45 @@ public function unequipMenu():void
 	clearMenu();
 	if (pc.upperUndergarment.shortName != "") 
 	{
-		this.addOverrideItemButton(0, pc.upperUndergarment, "U.Top Off", unequip, "bra");
+		this.addOverrideItemButton(0, pc.upperUndergarment, "Undertop", unequip, "bra");
 	}
 	else this.addDisabledButton(0,"Undertop");
 
 	if (pc.shield.shortName != "") 
 	{
-		this.addOverrideItemButton(1, pc.shield, "Shield Off", unequip, "shield");
+		this.addOverrideItemButton(1, pc.shield, "Shield", unequip, "shield");
 	}
 	else this.addDisabledButton(1,"Shield");
 	
 	if (pc.lowerUndergarment.shortName != "")
 	{
-		this.addOverrideItemButton(5, pc.lowerUndergarment, "U.Wear Off", unequip, "underwear");
+		this.addOverrideItemButton(5, pc.lowerUndergarment, "UnderwearOff", unequip, "underwear");
 	}
-	else this.addDisabledButton(5,"Underwear");
+	else this.addDisabledButton(5,"UnderwearOff");
 	
 	if (pc.meleeWeapon.shortName != "Rock") 
 	{
 		this.addOverrideItemButton(2, pc.meleeWeapon, "Melee Off", unequip, "mWeapon");
 	}
-	else this.addDisabledButton(2,"Melee");
+	else this.addDisabledButton(2,"Melee Off");
 	
 	if (pc.armor.shortName != "") 
 	{
 		this.addOverrideItemButton(6, pc.armor, "Armor Off", unequip, "armor");
 	}
-	else this.addDisabledButton(6,"Armor");
+	else this.addDisabledButton(6,"Armor Off");
 	
 	if (pc.rangedWeapon.shortName != "Rock")
 	{
 		this.addOverrideItemButton(7, pc.rangedWeapon, "Ranged Off", unequip, "rWeapon");
 	}
-	else this.addDisabledButton(7,"Ranged");
+	else this.addDisabledButton(7,"Ranged Off");
 	
 	if (pc.accessory.shortName != "") 
 	{
-		this.addOverrideItemButton(3, pc.accessory, "Acc. Off", unequip, "accessory");
+		this.addOverrideItemButton(6, pc.accessory, "Acc. Off", unequip, "accessory");
 	}
-	else this.addDisabledButton(3,"Accessory");
+	else this.addDisabledButton(6,"Acc. Off");
 	
 	//Set user and target.
 	itemUser = pc;
@@ -376,7 +371,7 @@ public function generalInventoryMenu():void
 	var adjustment:int = 0;
 	for(x = 0; x < pc.inventory.length || x < 14; x++) {
 		//0 = unequip menu
-		if(x+adjustment == 13) {
+		if(x+adjustment == 0) {
 			addButton(x+adjustment,"Unequip",unequipMenu,undefined,"Unequip","Unequip an item.");
 			adjustment++;
 		}
@@ -595,9 +590,7 @@ public function itemCollect(newLootList:Array, clearScreen:Boolean = false):void
 		this.clearMenu();
 		this.addButton(0,"Replace", replaceItemPicker, newLootList);  // ReplaceItem is a actionscript keyword. Let's not override it, mmkay?
 		this.addButton(1,"Discard", discardItem,       newLootList);
-		//Hacky fix. If you hit useLoot with stuff that has its own submenus, it'll overwrite the submenu with the loot info for the next item. For instance, if you loot a hand cannon and a spear, then equip the hand cannon, your old ZK rifle will vanish into the ether while the game jumps over it to the spear.
-		if ((newLootList.length >= 2)) addDisabledButton(2,"Use","Use","You cannot use an item while there are more items in the loot queue.");
-		else if ((newLootList[0] as ItemSlotClass).isUsable == true) this.addButton(2,"Use",     useLoot,           newLootList);
+		if ((newLootList[0] as ItemSlotClass).isUsable == true) this.addButton(2,"Use",     useLoot,           newLootList);
 	}
 	else
 	{			
@@ -608,17 +601,17 @@ public function itemCollect(newLootList:Array, clearScreen:Boolean = false):void
 		//Clear the item off the newLootList.
 		newLootList.splice(0,1);
 		this.clearMenu();
-		if(newLootList.length > 0) this.addButton(0,"Next",itemCollect,newLootList);
+		if(newLootList.length > 0) this.addButton(0,"Next",itemCollect);
 		else this.addButton(0,"Next",lootScreen);
 	}
 }
 
 public function discardItem(lootList:Array):void {
 	clearOutput();
-	output("You discard " + lootList[0].longName + " (x" + lootList[0].quantity + ").\n\n");
+	output("You discard " + lootList[0].longName + " (x" + lootList[0].quantity + ").");
 	lootList.splice(0,1);
 	this.clearMenu();
-	if(lootList.length > 0) this.addButton(0,"Next",itemCollect, lootList);
+	if(lootList.length > 0) this.addButton(0,"Next",itemCollect);
 	else this.addButton(0,"Next",lootScreen);
 }
 
@@ -680,10 +673,7 @@ public function replaceItemGo(args:Array):void
 	lootList.splice(0,1);
 	this.clearMenu();
 	if(lootList.length > 0) 
-	{
-		output("\n\n");
 		this.addButton(0,"Next",itemCollect, lootList);
-	}
 	else 
 		this.addButton(0,"Next",lootScreen);
 }
@@ -805,7 +795,7 @@ public function getListOfType(from:Array, type:String):Array
 				break;
 				
 			case "CONSUMABLES":
-				if (InCollection(item.type, GLOBAL.PILL, GLOBAL.FOOD, GLOBAL.POTION, GLOBAL.DRUG, GLOBAL.EXPLOSIVECONSUMABLE))
+				if (InCollection(item.type, GLOBAL.PILL, GLOBAL.FOOD, GLOBAL.POTION, GLOBAL.DRUG))
 				{
 					items.push(item);
 				}

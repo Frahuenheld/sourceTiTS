@@ -172,7 +172,6 @@
 					while (dataObject.version < this._latestVersion)
 					{
 						this["UpgradeVersion" + dataObject.version](dataObject);
-						dataObject.version++;
 					}
 				}
 				
@@ -187,22 +186,11 @@
 			{
 				for (prop in dataObject)
 				{
-					if (!hasOwnProperty(prop)) continue;
-					
 					if (_ignoredFields.length > 0)
 					{
 						if (_ignoredFields.indexOf(prop) == -1)
 						{
-							if (this[prop] is ISaveable)
-							{
-								var classT:Class = getDefinitionByName(dataObject[prop].classInstance) as Class;
-								this[prop] = new classT();
-								this[prop].loadSaveObject(dataObject[prop]);
-							}
-							else
-							{
-								this[prop] = dataObject[prop];
-							}
+							this[prop] = dataObject[prop];
 						}
 					}
 					else

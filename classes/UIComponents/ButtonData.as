@@ -1,7 +1,5 @@
-﻿
 package classes.UIComponents 
 {
-	import classes.kGAMECLASS;
 	/**
 	 * ...
 	 * @author Gedan
@@ -66,9 +64,6 @@ package classes.UIComponents
 			this.buttonName = cap;
 			this.func = func;
 			this.arg = arg;
-			//APRIL FOOLS!
-			//if(ttHeader is String) this.tooltipHeader = ttHeader;
-			//else this.tooltipHeader = ttHeader;
 			this.tooltipHeader = ttHeader;
 			this.tooltipBody = ttBody;
 		}

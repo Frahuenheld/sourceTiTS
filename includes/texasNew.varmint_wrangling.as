@@ -1,5 +1,4 @@
-﻿import classes.Engine.Combat.DamageTypes.TypeCollection;
-import classes.Items.Miscellaneous.VarmintItem;
+﻿import classes.Items.Miscellaneous.VarmintItem;
 import classes.Items.Miscellaneous.Silicone;
 
 /*Faux Cow Farmer
@@ -327,16 +326,18 @@ public function lassoAVarmint():void
 	clearOutput();
 	//Set drone target
 	setDroneTarget(foes[0]);
+	var damage:int = 0;
 	output("You twirl your light lasso, trying to get a bead on the varmint. When you've got enough spin, you let the lasso go, hurling it toward the varmint!");
 	//Miss
 	if(rangedCombatMiss(pc,foes[0])) output(" The glowing rope goes wide, scattering into the ground. You quickly reel it back in.\n");
 	else
 	{
-		var damage:TypeCollection = new TypeCollection( { kinetic: 20 + (pc.aim() / 2) } );
-		damageRand(damage, 15);
-		
+		damage = 20 + pc.aim()/2;
+		//Randomize +/- 15%
+		var randomizer:Number = (rand(31)+ 85)/100;
+		damage *= randomizer;
 		//Will this down the fucker
-		if(damage.getTotal() - foes[0].defense() >= foes[0].HP()) output(" <b>You snag the varmint by the neck! You give the lasso a tug, throwing the creature to the ground in a defeated lump.</b>");
+		if(damage - foes[0].defense() >= foes[0].HP()) output(" <b>You snag the varmint by the neck! You give the lasso a tug, throwing the creature to the ground in a defeated lump.</b>");
 		//Naw, he's still up
 		else
 		{
@@ -346,7 +347,7 @@ public function lassoAVarmint():void
 			else output("spike");
 			output(" on the varmint, barreling the creature to the ground.");
 		}
-		applyDamage(damage, pc, foes[0]);
+		genericDamageApply(damage,pc,foes[0],GLOBAL.KINETIC);
 		//Used to track if the PC downed the shithead with a whip or something else.
 		foes[0].createStatusEffect("Lassoed");
 		output("\n");
@@ -382,11 +383,11 @@ public function leapAttackFromVarmint():void
 			output("throws you right to the ground!");
 			pc.createStatusEffect("Trip", 0, 0, 0, 0, false, "DefenseDown", "You've been tripped, reducing your effective physique and reflexes by 4. You'll have to spend an action standing up.", true, 0);
 		}
-		
-		var damage:TypeCollection = new TypeCollection( { kinetic: 12 }, DamageFlag.PENETRATING);
-		damageRand(damage, 15);
-		applyDamage(damage, foes[0], pc);
-		
+		var damage:int = 12;
+		//Randomize +/- 15%
+		var randomizer:Number = (rand(31)+ 85)/100;
+		damage *= randomizer;
+		genericDamageApply(damage,foes[0],pc,GLOBAL.PIERCING);
 	}
 	else output(" You slip out of the way.");
 	processCombat();
@@ -397,10 +398,11 @@ public function leapAttackFromVarmint():void
 public function getMauledBiyaaaaatch():void
 {
 	output("While you're on the ground, the oversized varmint leaps onto you, savaging you with its huge teeth! You're able to get an arm up in time to save your throat, but it still grabs you and shakes its head, tearing into you.");
-	var damage:TypeCollection = new TypeCollection( { kinetic: 40 + rand(6) }, DamageFlag.PENETRATING);
-	damageRand(damage, 15);
-	applyDamage(damage, foes[0], pc);
-	
+	var damage:int = 40+rand(6);
+	//Randomize +/- 15%
+	var randomizer:Number = (rand(31)+ 85)/100;
+	damage *= randomizer;
+	genericDamageApply(damage,foes[0],pc,GLOBAL.PIERCING);
 	processCombat();
 }
 
@@ -413,16 +415,16 @@ public function varmintRamAttack():void
 	else
 	{
 		output("into your [pc.leg], giving you a pointy, painful head-butt!");
-		var damage:TypeCollection = new TypeCollection( { kinetic: 12 + rand(6) }, DamageFlag.PENETRATING);
-		damageRand(damage, 15);
-		
+		var damage:int = 12+rand(6);
+		//Randomize +/- 15%
+		var randomizer:Number = (rand(31)+ 85)/100;
+		damage *= randomizer;
 		if (!pc.hasStatusEffect("Stunned") && pc.physique() + rand(20) + 1 < 18)
 		{
 			output("<b> The hit was hard enough to stun you!</b>");
 			pc.createStatusEffect("Stunned",1,0,0,0,false,"Stun","You are stunned and cannot move until you recover!",true,0);
 		}
-		
-		applyDamage(damage, foes[0], pc);
+		genericDamageApply(damage,foes[0],pc,GLOBAL.PIERCING);
 
 	}
 	processCombat();
