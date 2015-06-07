@@ -13,7 +13,7 @@
 		//constructor
 		public function ACock()
 		{
-			this._latestVersion = 2;
+			this._latestVersion = 1;
 			this.hasRandomProperties = true;
 			
 			this.quantity = 1;
@@ -24,7 +24,7 @@
 			this.shortName = "A.Cock";
 			
 			//Regular name
-			this.longName = "synth-phallus - terran";
+			this.longName = "KihaCorp-branded synth-phallus modelled after a terran's";
 			
 			TooltipManager.addFullName(this.shortName, StringUtil.toTitleCase(this.longName));
 			
@@ -41,6 +41,8 @@
 			//Information
 			this.basePrice = 11000;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -48,13 +50,14 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, 0, 0);
 			
 			this.version = _latestVersion;
 		}	
 		//METHOD ACTING!
 		override public function useFunction(target:Creature, usingCreature:Creature = null):Boolean
 		{
-			if(!kGAMECLASS.infiniteItems()) quantity++;
+			if(!kGAMECLASS.debug) quantity++;
 			if(target is PlayerCharacter) {
 				//Consume:
 				kGAMECLASS.clearOutput();
@@ -66,14 +69,6 @@
 				kGAMECLASS.output(target.capitalA + target.short + " cannot use this.");
 			}
 			return true;
-		}
-		
-		public function UpgradeVersion1(d:Object):void
-		{
-			delete d.bonusResistances;
-			delete d.bonusLustVuln;
-			delete d.damage;
-			delete d.damageType;
 		}
 	}
 }

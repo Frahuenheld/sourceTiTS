@@ -15,7 +15,6 @@
 			
 			<manifest android:installLocation="auto">
 			  <uses-sdk android:minSdkVersion="8"/>
-			  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 				<uses-permission android:name="android.permission.INTERNET"/>
 				<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
 			</manifest>
@@ -47,7 +46,7 @@
     </iPhone> 
 	
 	<initialWindow>
-		<title>TiTS AIR DEV</title>
+		<title>AirTemplateProj</title>
 		<content>AirTemplateProj.swf</content>
 		<visible>true</visible>
 		<fullScreen>true</fullScreen>

@@ -1,6 +1,5 @@
 ﻿package classes.Items.Protection
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.ItemSlotClass;
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
@@ -38,6 +37,8 @@
 			//Information
 			this.basePrice = 325;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.PIERCING;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 18;
@@ -45,9 +46,10 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
-			
-			resistances = new TypeCollection();
-			resistances.kinetic.damageValue = 45.0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
+			this.bonusResistances[GLOBAL.KINETIC] = .45;
+			this.bonusResistances[GLOBAL.SLASHING] = .35;
+			this.bonusResistances[GLOBAL.PIERCING] = .25;
 			
 			this.version = _latestVersion;
 		}

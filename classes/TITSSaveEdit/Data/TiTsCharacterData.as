@@ -44,6 +44,8 @@ package classes.TITSSaveEdit.Data
 			"HPMod",
 			"energyMod",
 			"lustRaw",
+			"lustVuln",
+			"resistances",
 			"tailType",
 			"tailCount", 
 			"tailFlags",
@@ -144,6 +146,10 @@ package classes.TITSSaveEdit.Data
 		public var HPMod:int;
 		public var energyMod:Number;
 		public var lustRaw:Number;
+		public var lustVuln:Number;
+		
+		// Resistances
+		public var resistances:Array;
 		
 		// Tail
 		public var tailType:Number;
@@ -322,6 +328,13 @@ package classes.TITSSaveEdit.Data
 			HPMod = 0;
 			energyMod = 0;
 			lustRaw = 0;
+			lustVuln = 1.0;
+			
+			resistances = [];
+			for (var i:int = 0; i < GLOBAL.MAX_DAMAGE_TYPES; i++)
+			{
+				resistances.push(1.0);
+			}
 			
 			tailType = 0;
 			tailCount = 0;

@@ -30,8 +30,6 @@
 			//Displayed on tooltips during mouseovers
 			this.tooltip = "You can pretty much find a rock anywhere, and they hurt more than fists, sooooo....";
 			
-			this.baseDamage.kinetic.damageValue = 0.1;
-			
 			TooltipManager.addTooltip(this.shortName, this.tooltip);
 			
 			this.attackVerb = "smack";
@@ -39,6 +37,8 @@
 			//Information
 			this.basePrice = 0;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -46,6 +46,7 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

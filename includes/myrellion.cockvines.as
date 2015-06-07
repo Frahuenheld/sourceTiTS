@@ -1,5 +1,4 @@
 import classes.Characters.PlayerCharacter;
-import classes.Engine.Combat.DamageTypes.TypeCollection;
 import classes.Items.Accessories.TamWolf;
 import classes.Items.Accessories.TamWolfDamaged;
 public function adultCockvineHeader():void
@@ -59,8 +58,8 @@ public function adultCockvineEncounter():void
 			}
 
 			clearMenu();
-			addButton(0, "Leave", adultCockvineEncounterStop, undefined, "Stop Moving", "Stop moving towards the cockvines.");
-			addButton(1, "Go on...", adultCockvineEncounterGoOn, undefined, "Go on", "Surrender yourself to the cockvines.");
+			addButton(0, "Stop", adultCockvineEncounterStop, undefined, "Stop Moving", "Stop moving towards the cockvines.");
+			addButton(1, "Go on", adultCockvineEncounterGoOn, undefined, "Go on", "Surrender yourself to the cockvines.");
 		}
 		else
 		{
@@ -89,8 +88,8 @@ public function adultCockvineEncounter():void
 			}
 
 			clearMenu();
-			addButton(0, "Leave", adultCockvineEncounterStop, undefined, "Stop Moving", "Stop moving towards the cockvines.");
-			addButton(1, "Go on...", adultCockvineEncounterGoOn, undefined, "Go on", "Surrender yourself to the cockvines.");
+			addButton(0, "Stop", adultCockvineEncounterStop, undefined, "Stop Moving", "Stop moving towards the cockvines.");
+			addButton(1, "Go on", adultCockvineEncounterGoOn, undefined, "Go on", "Surrender yourself to the cockvines.");
 		}
 	}
 	else
@@ -190,8 +189,7 @@ public function adultCockvineConstrictAttack():void
 
 		pc.addStatusValue("Cockvine Grip", 1, 1);
 		
-		var damage:TypeCollection = new TypeCollection( { kinetic: 15 * (0.5 + (pc.statusEffectv1("Cockvine Grip") / 2)) }, DamageFlag.CRUSHING);
-		damageRand(damage, 15);
+		var damage:Number = damageRand(15 * (0.5 + (pc.statusEffectv1("Cockvine Grip") / 2)), 15);
 		
 		switch (pc.statusEffectv1("Cockvine Grip"))
 		{
@@ -213,7 +211,7 @@ public function adultCockvineConstrictAttack():void
 
 		}
 		
-		applyDamage(damage, foes[0], pc);
+		genericDamageApply(damage, foes[0], pc, GLOBAL.KINETIC);
 	}
 	else
 	{
@@ -266,7 +264,7 @@ public function adultCockvineMowThisAttack():void
 	}
 }
 
-public function adultCockvineGrenadesInEnclosedSpaces(damageValue:TypeCollection, pluralNades:Boolean = false, usedLauncher:Boolean = false, isLustGas:Boolean = false):void
+public function adultCockvineGrenadesInEnclosedSpaces(damageValue:Number, pluralNades:Boolean = false, usedLauncher:Boolean = false, isLustGas:Boolean = false):void
 {
 	//Activates if PC uses a grenade. 50% chance of taking damage/getting gassed
 	output("\nThe moment the grenade");
@@ -297,14 +295,12 @@ public function adultCockvineGrenadesInEnclosedSpaces(damageValue:TypeCollection
 		if (isLustGas)
 		{
 			output(" Dazed, you cannot help but take a big gulp of the gas now billowing thickly through the cramped, slithery pit.");
-			var damage:TypeCollection = damageValue.makeCopy();
-			damage.applyResistances(pc.getLustResistances());
-			pc.lust(damage.getTotal());
+			pc.lust(damageValue);
 		}
 		else
 		{
 			output(" Though the writhing mass of cockvines absorbs the majority of it, you are thumped mightily hard by the impact of the explosion.");
-			applyDamage(damageValue, pc, pc);
+			genericDamageApply(damageValue, pc, pc, GLOBAL.KINETIC);
 		}
 	}
 }

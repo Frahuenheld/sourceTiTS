@@ -1,8 +1,5 @@
 ﻿package classes.Characters
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
-	
 	import classes.Creature;
 	import classes.GLOBAL;
 	import classes.kGAMECLASS;
@@ -31,13 +28,12 @@
 			this.customDodge = "The cunt snake sways aside at the last second!";
 			this.customBlock = "Your attack deflects off the cunt snake's " + this.scaleColor + " scales!";
 			this.plural = false;
-			
-			isLustImmune = true;
+			this.lustVuln = 0;
 			
 			this.meleeWeapon.attackVerb = "bite";
-			meleeWeapon.baseDamage.kinetic.damageValue = 4;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
+			this.meleeWeapon.damageType = GLOBAL.PIERCING;
 			this.meleeWeapon.attack = 2;
+			this.meleeWeapon.damage = 4;
 			this.meleeWeapon.longName = "fangs";
 			this.meleeWeapon.hasRandomProperties = true;
 			
@@ -54,6 +50,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 15;
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 20;
 			this.level = 1;
 			this.credits = 0;

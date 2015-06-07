@@ -3,8 +3,6 @@
 	import classes.Creature;
 	import classes.GLOBAL;
 	import classes.Items.Miscellaneous.*;
-	import classes.Items.Transformatives.OvirAce;
-	import classes.Items.Transformatives.OvirPositive;
 	import classes.kGAMECLASS;
 	import classes.rand;
 	
@@ -13,7 +11,7 @@
 		//constructor
 		public function Jade()
 		{
-			this._latestVersion = 7;
+			this._latestVersion = 5;
 			this.version = _latestVersion;
 			this._neverSerialize = false;
 			
@@ -25,6 +23,7 @@
 			this.customDodge = "PLACE HOLDER!";
 			this.customBlock = "PLACE HOLDER!";
 			this.plural = false;
+			this.lustVuln = 1;
 			
 			this.meleeWeapon.attackVerb = "claw";
 			this.meleeWeapon.longName = "claws";
@@ -43,7 +42,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 35;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 50;
 			this.level = 4;
 			this.credits = 0;
@@ -56,8 +55,6 @@
 			this.inventory.push(new KnotAProblem());
 			this.inventory.push(new HorsePill());
 			this.inventory.push(new AusarTreats());
-			inventory.push(new OvirAce());
-			inventory.push(new OvirPositive());
 			this.typesBought[this.typesBought.length] = GLOBAL.PILL;
 			this.typesBought[this.typesBought.length] = GLOBAL.POTION;
 			this.typesBought[this.typesBought.length] = GLOBAL.DRUG;
@@ -195,22 +192,6 @@
 		public function UpgradeVersion4(dataObject:Object):void
 		{
 			dataObject.inventory.push(new NukiCookies().getSaveObject());
-		}
-		
-		public function UpgradeVersion5(dataObject:Object):void
-		{
-			delete dataObject.resistances;
-			delete dataObject.bonusResistances;
-			delete dataObject.armor;
-			delete dataObject.meleeWeapon;
-			delete dataObject.lustVuln;
-			delete dataObject.bonusLustVuln;
-		}
-		
-		public function UpgradeVersion6(d:Object):void
-		{
-			d.inventory.push(new OvirAce().getSaveObject());
-			d.inventory.push(new OvirPositive().getSaveObject());
 		}
 	}
 }

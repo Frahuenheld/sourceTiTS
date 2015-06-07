@@ -1,7 +1,6 @@
 ﻿package classes.Characters
 {
 	import classes.Creature;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.GLOBAL;
 	import classes.Items.Guns.*
 	import classes.Items.Protection.ImprovisedShield;
@@ -10,15 +9,13 @@
 	import classes.kGAMECLASS;
 	import classes.rand;
 	import classes.GameData.CodexManager;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	public class Gianna extends Creature
 	{
 		//constructor
 		public function Gianna()
 		{
-			this._latestVersion = 3;
+			this._latestVersion = 2;
 			this.version = _latestVersion;
 			this._neverSerialize = false;
 			
@@ -30,22 +27,18 @@
 			this.long = "";
 			this.customBlock = "Your attack fails to damage the 'bot.";
 			this.plural = false;
-			
+			this.lustVuln = 0;
+			this.meleeWeapon.damage = 5;
 			this.meleeWeapon.attack = 5;
 			this.meleeWeapon.longName = "tentacle";
 			this.meleeWeapon.attackVerb = "smack";
 			this.meleeWeapon.hasRandomProperties = true;
-			
-			meleeWeapon.baseDamage.kinetic.damageValue = 5;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.CRUSHING);
 
+			this.rangedWeapon.damage = 10;
 			this.rangedWeapon.attack = 10;
 			this.rangedWeapon.longName = "shotgun";
 			this.rangedWeapon.attackVerb = "shot";
 			this.rangedWeapon.hasRandomProperties = true;
-			
-			rangedWeapon.baseDamage.kinetic.damageValue = 10;
-			rangedWeapon.addFlag(DamageFlag.BULLET);
 			
 			this.armor.longName = "latex";
 			this.armor.defense = 1;
@@ -62,10 +55,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 50;
-			
-			baseHPResistances = new TypeCollection();
-			baseHPResistances.electric.damageValue = -40.0;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1.4,1);
 			this.XPRaw = 250;
 			this.level = 4;
 			this.credits = 100;
@@ -176,15 +166,6 @@
 		public function UpgradeVersion1(dataObject:Object):void
 		{
 			dataObject.vaginas[0].hymen = false;
-		}
-		public function UpgradeVersion2(d:Object):void
-		{
-			delete d.resistances;
-			delete d.bonusResistances;
-			delete d.lustVuln;
-			delete d.meleeWeapon;
-			delete d.rangedWeapon;
-			delete d.armor;
 		}
 	}
 }

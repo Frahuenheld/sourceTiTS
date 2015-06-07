@@ -1,8 +1,5 @@
 ﻿package classes.Characters
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
-	
 	import classes.Creature;
 	import classes.GLOBAL;
 	import classes.Items.Miscellaneous.*;
@@ -28,15 +25,12 @@
 			this.customDodge = "The machina lazily lists to the side, causing your attack to go wayward!";
 			this.customBlock = "The machina’s thick plates cause the attack to glance off into the wilderness!";
 			this.plural = false;
-			
-			isLustImmune = true;
+			this.lustVuln = 0;
 			
 			this.meleeWeapon.attackVerb = "claw";
 			this.meleeWeapon.longName = "pincers";
-			
-			meleeWeapon.baseDamage.kinetic.damageValue = 3;
-			meleeWeapon.baseDamage.addFlag(DamageFlag.PENETRATING);
-			
+			this.meleeWeapon.damage = 3;
+			this.meleeWeapon.damageType = GLOBAL.SLASHING;
 			this.meleeWeapon.hasRandomProperties = true;
 			
 			this.armor.longName = "metal plates";
@@ -52,6 +46,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 0;
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 100;
 			this.level = 3;
 			this.credits = 0;

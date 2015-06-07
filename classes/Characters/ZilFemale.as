@@ -26,6 +26,7 @@
 			this.customDodge = "The zil girl tumbles out of the way with a swift contortion.";
 			this.customBlock = "The zil's chitinous armor deflects your attack.";
 			this.plural = false;
+			this.lustVuln = 1;
 			this.meleeWeapon = new Fists();
 			
 			this.rangedWeapon.attack = 1;
@@ -46,6 +47,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 45;
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 20;
 			this.level = 1;
 			this.credits = 0;

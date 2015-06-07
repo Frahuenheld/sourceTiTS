@@ -41,9 +41,8 @@ package classes.Items.Melee
 			//Information
 			this.basePrice = 0;
 			this.attack = 0;
-			
-			baseDamage.kinetic.damageValue = 4;
-			
+			this.damage = 4;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -51,6 +50,7 @@ package classes.Items.Melee
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

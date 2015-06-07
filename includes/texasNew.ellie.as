@@ -23,7 +23,6 @@ public function ellieApproachButtonSetup():void
 {
 	if(flags["MET_ELLIE"] != undefined) addButton(0,"Ellie",ellieMenu,undefined,"Ellie","Approach Ellie, the leithan running the gift shop.");
 	else addButton(0,"Shopkeep",meetingEllie,undefined,"Shopkeep","Approach the shopkeeper and see what she's selling.");
-	vendingMachineButton(1);
 }
 
 //Meeting Ellie ([Shopkeeper])
@@ -72,7 +71,7 @@ public function meetingEllie():void
 	output(".");
 
 	output("\n\n<i>“Hehe. Like what you see?”</i> she teases, finally putting a stop to her blatant show and crossing her arms under her cow-like bosom. <i>“Don’t be shy - most of the bulls around here sure aren’t!”</i>");
-	applyDamage(new TypeCollection( { tease: 10 } ), null, pc, "minimal");
+	pc.lustDamage(10);
 	processTime(4);
 	clearMenu();
 	//[Yes] [Meh] [Don’t Like Girls]
@@ -508,7 +507,6 @@ public function suckleDatCowtaurTeat():void
 	output("\n\nYou only later notice that you’re moaning, too: needy, desperate little moans as her milk begins to affect you. Even before you started drinking, Ellie’s pheromones had made you blatantly aroused, barely able to hide your chemical excitement around the musky centaurin. Now, your desperate need is almost painful, your lusts boiling until you can’t think of anything but your raging excitement and how beautiful, soft, and warm the teat in your face is. You concentrate on that, trying to stay grounded from your lust. All of your attention focuses on Ellie’s breast, your fingers starting to knead and squeeze it, playing with the little patches of straining scales and plates that would all but cover a normally-endowed leithan’s rack. On Ellie, her plates look like tiny freckles of black compared to the immensity of her bosom, doing absolutely nothing to hide or support it. Your body, at least, is doing the latter: you completely lose yourself in the leithan’s cleavage, with no small help from her hand’s guidance, nuzzling against the hot, sheer curve of one tit as you suckle from the other.");
 	output("\n\n<i>“You’re starting to feel it, huh?”</i> Ellie teases, her free hand gently playing across your ever-more relaxed body. Every brush of her fingers feels like a starburst on your tender flesh - God you’re sensitive now! When her hand moves down your thigh, you nearly feel yourself cumming on the spot - just from the briefest touch. Oh, fuck. <i>“Like I said, my milk will just drive you wild.... Don’t worry about a thing, sweetie, just let me take care of you. I’ll be gentle.”</i>");
 	output("\n\nAs she speaks, her hand slips further up your thigh, fingertips brushing across your [pc.crotch] and sending an electric fire of pleasure up your spine. You almost choke on your current mouthful of milk. Do you let Ellie have her way with you?");
-	pc.exhibitionism(1);
 	pc.lust(90+rand(20));
 	processTime(8);
 	pc.energy(200);
@@ -734,7 +732,6 @@ public function publicUseForBullsByCentaurians():void
 		}
 	}
 	clearMenu();
-	pc.exhibitionism(2);
 	addButton(0,"Next",mainGameMenu);
 }
 
@@ -840,7 +837,7 @@ public function ellieBigDickVaginalScenesForBigDickBoysWithBigDicksAndNowImJustT
 	if(pc.legCount > 1) output(" between");
 	else output(" along");
 	output(" your [pc.legOrLegs] to splatter between her hind claws.");
-	output("\n\n<i>“Oh, I needed that,”</i> Ellie moans, still massaging her huge tits. <i>“Nothing beats a big, thick cock and a belly full of spunk...”</i> At that, her reptilian tail releases you. You almost fall without her support, your [pc.legOrLegs] all but giving out after your desperate orgasm. With a little yelp, you flop back down onto the mass of pillows behind her, watching with a smile as the leithan’s tail twitches, and a trickle of your spooge drools out of her thoroughly-fucked twat. Smiling at you over her shoulder, the taur adds, <i>“You sure know how to fuck a big ol’ ‘taur like me, huh? Hmm... I wonder if any of your little swimmers will be the one, huh? You think you might get to be the lucky winner to finally knock me up? Guess we’ll see...”</i>");
+	output("\n\n<i>“Oh, I needed that,”</i> Ellie moans, still massaging her huge tits. <i>“Nothing beats a big, thick cock and a belly full of spunk...”</i> At that, her reptilian tail releases you. You almost fall without her support, your [pc.legOrLegs] all but giving out after your desperate orgasm. With a little yelp, you flop back down onto the mass of pillows behind her, watching with a smile as the leithan’s tail twitches, and a trickle of your spooge drools out of her thoroughly-fucked twat. Smiling at you over her shoulder, the taur adds, <i>“You sure know how to fuck a big ol’ ‘taur like me, huh? Hmm... I wonder if any of you little swimmers will be the one, huh? You think you might get to be the lucky winner to finally knock me up? Guess we’ll see...”</i>");
 	output("\n\nYou weakly give the centaurin a thumbs up. She giggles and picks you up, easily slinging you onto her back");
 	if(pc.isTaur() || pc.isNaga()) output(", bestial body and all");
 	output(" - the impact of which has the delightful effect of making her spooge-packed hole squirt a little of your seed back onto the floor. <i>“C’mon, sweetheart, let’s get you back to the shop.”</i>");

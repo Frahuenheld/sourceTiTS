@@ -1,7 +1,6 @@
 ﻿package classes.Characters
 {
 	import classes.Creature;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
 	import classes.GLOBAL;
 	import classes.Items.Melee.Fists;
 	import classes.Items.Miscellaneous.*
@@ -28,12 +27,7 @@
 			this.customDodge = "The wetraxxel brawler rolls aside in a remarkable display of agility for one with such a large frame.";
 			this.customBlock = "The alien's chitin deflects the attack.";
 			this.plural = false;
-			
-			baseHPResistances.drug.resistanceValue = 20.0;
-			baseHPResistances.tease.resistanceValue = 20.0;
-			baseHPResistances.pheromone.resistanceValue = 20.0;
-			baseHPResistances.psionic.resistanceValue = 20.0;
-			
+			this.lustVuln = 0.8;
 			this.meleeWeapon = new Fists();
 			
 			this.armor.longName = "chitinous plating";
@@ -49,12 +43,7 @@
 			this.shieldsRaw = 0;
 			this.energyRaw = 100;
 			this.lustRaw = 10;
-			
-			baseHPResistances = new TypeCollection();
-			baseHPResistances.kinetic.damageValue = 20.0;
-			baseHPResistances.burning.damageValue = 20.0;
-			baseHPResistances.electric.damageValue = 20.0;
-			
+			this.resistances = new Array(0.8,0.8,0.8,0.8,0.8,1,0.8,0.8);
 			this.XPRaw = 500;
 			this.level = 7;
 			this.credits = 0;
@@ -173,14 +162,11 @@
 			
 			this._isLoading = false;
 		}
-		override public function setDefaultSexualPreferences():void
-		{
-			this.sexualPreferences.setRandomPrefs(4 + rand(3),2);
-		}
+		
 		override public function prepForCombat():void
 		{
 			var brawler:WetraxxelBrawler = this.makeCopy();
-			brawler.setDefaultSexualPreferences();
+			
 			kGAMECLASS.userInterface.showBust("WETRAXXEL");
 			kGAMECLASS.userInterface.showName("FIGHT:\nWETRAXXEL");
 			

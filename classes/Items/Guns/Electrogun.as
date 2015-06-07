@@ -1,8 +1,5 @@
 ﻿package classes.Items.Guns
 {
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
-	
 	import classes.ItemSlotClass;
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
@@ -43,10 +40,8 @@
 			//Information
 			this.basePrice = 3450;
 			this.attack = 2;
-			
-			baseDamage.electric.damageValue = 12;
-			baseDamage.addFlag(DamageFlag.ENERGY_WEAPON);
-			
+			this.damage = 12;
+			this.damageType = GLOBAL.ELECTRIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -54,6 +49,7 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

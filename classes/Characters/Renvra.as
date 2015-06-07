@@ -8,6 +8,11 @@
 	import classes.Items.Protection.JoyCoPremiumShield;
 	
 	/**
+	 * KIRO FLAG DOCS
+	 * "RESCUE KIRO FROM BLUEBALLS" (Undefined = not attempted, -1 ignored the message or left her, 1 = saved from beachedballs)
+	 */
+	
+	/**
 	 * ...
 	 * @author Gedan
 	 */
@@ -27,6 +32,7 @@
 			this.customDodge = "PLACEHOLDAH";
 			this.customBlock = "Obvious placeholder is obvious.";
 			this.plural = false;
+			this.lustVuln = 1;
 			
 			//PLACEHOLDAH STATS & NO EQUIPPED SHIT
 			this.level = 1;
@@ -41,7 +47,7 @@
 			this.HPRaw = this.HPMax();
 			this.energyRaw = 100;
 			this.lustRaw = 70;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 500;
 			
 			this.credits = 1200;

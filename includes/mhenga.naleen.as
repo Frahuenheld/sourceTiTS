@@ -1,6 +1,4 @@
 ﻿import classes.Creature;
-import classes.Engine.Combat.DamageTypes.DamageResult;
-import classes.Engine.Combat.DamageTypes.TypeCollection;
 
 //UNLESS OTHERWISE NOTED, ALL SCENES BY SAVINOXO
 //Female Naleen Encounter
@@ -103,23 +101,28 @@ public function naleenConstrict():void {
 	{
 		output("The naleen's constricting embrace tightens slightly, coil after coil slithering around your compressing flesh.");
 	}
+	var attacker:Creature = foes[0];
+	var target:Creature = pc;
+	//Damage bonuses:
+	var damage:int = 5 + rand(5);
+	//Randomize +/- 15%
+	var randomizer:Number = (rand(31)+ 85)/100;
+	damage *= randomizer;
+	var sDamage:Array = new Array();
 	
-	var damage:TypeCollection = damageRand(new TypeCollection( { kinetic: 5 + rand(5) } ), 15);
-	var damageResult:DamageResult = calculateDamage(damage, foes[0], pc, "constrict");
-	
-	if (damageResult.shieldDamage > 0)
-	{
-		if (damageResult.hpDamage == 0) output(" Your shield crackles but holds. ");
-		else output(" There is a concussive boom and tingling aftershock of energy as your shield is breached. ");
+	//Apply damage reductions
+	if(target.shieldsRaw > 0) {
+		sDamage = shieldDamage(target,damage,attacker.meleeWeapon.damageType);
+		//Set damage to leftoverDamage from shieldDamage
+		damage = sDamage[1];
+		if(target.shieldsRaw > 0) output(" Your shield crackles but holds. (<b>" + sDamage[0] + "</b>)");
+		else output(" There is a concussive boom and tingling aftershock of energy as your shield is breached. (<b>" + sDamage[0] + "</b>)");
 	}
-	
-	if (damageResult.hpDamage > 0)
-	{
-		if (damageResult.shieldDamage == 0) output(" Your breath is taken away by a brutal squeezes, and in a moment you're seeing stars!");
+	if(damage >= 1) {
+		damage = HPDamage(target,damage,attacker.meleeWeapon.damageType);
+		if(sDamage[0] > 0) output(" Your breath is taken away by a brutal squeezes, and in a moment you're seeing stars! (<b>" + damage + "</b>)");
+		else output(" (<b>" + damage + "</b>)");	
 	}
-	
-	outputDamage(damageResult);
-
 	processCombat();
 }
 
@@ -176,8 +179,8 @@ public function biteAttack():void {
 		pc.aimMod -= .5;
 		pc.willpowerMod -= .5;
 		pc.reflexesMod -= .5;
-		pc.addStatusValue("Naleen Venom", 1, .5);
-		applyDamage(new TypeCollection( { drug: 10 + rand(10) } ), foes[0], pc, "minimal");
+		pc.addStatusValue("Naleen Venom",1,.5);
+		pc.lustDamage(10+rand(10));
 		if(pc.lust() >= pc.lustMax() || ((pc.physique() == 0 || pc.willpower() == 0) && pc.hasStatusEffect("Naleen Venom"))) output("\n\n<b>You're too doped up to care anymore. You give in.</b>");
 	}
 	processCombat();
@@ -909,7 +912,7 @@ public function naleenReverseBJPart2():void
 	output("You notice immediately that despite the feline features of her face, the girl's mouth is very snake-like, and her tongue is long and slippery rather than lined with the hard bristles that one would expect from a feline. The naleen’s lips purse around your shaft, but her snake-like tongue reels away from your cock as she tastes you. Of course, this causes balmy drool to cover your [pc.cockBiggest], which is warmed with every breath she expels. Disheartened by the less than stellar response from the big cat, you reluctantly pull your [pc.cockBiggest] free, if only for the moment. She looks away as your pillar of cock towers in front of her face, but her gaze shifts back soon enough. A moment later, her slitted eyes flick up to your own. She leans forward, taking hold of your base as she guides her snaking tongue up your cock, breathing in the musk of your ");
 	if(pc.balls > 0) output("[pc.balls]");
 	else output("[pc.cockBiggest]");
-	output(", causing her to drool. Her newfound eagerness coats her tongue in a slick lubrication, and she wastes no time in coating the rest of your shaft with her serpentine appendage.");
+	output(", causing her drool. Her newfound eagerness coats her tongue in a slick lubrication, and she wastes no time in coating the rest of your shaft with her serpentine appendage.");
 	output("\n\nThe snake woman shyly smiles at you as you pull away, returning to a standing position. She darts forward and takes your quivering cock between her feline claws. <i>“Mine?”</i> the naga asks as she gently pets and plays with your [pc.cockBiggest] using her fuzzy fingers. The light fur ");
 	if(pc.libido() < 80) output("covering her dextrous fingers causes your member to twitch from her pleasurable touch.");
 	else output("coating her dextrous fingers gives them a slightly soft feeling around your member. The gentle tickling from her ministrations causes extra blood to fill your glans.");

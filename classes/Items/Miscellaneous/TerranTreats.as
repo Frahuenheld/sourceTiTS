@@ -38,6 +38,8 @@
 			//Information
 			this.basePrice = 500;
 			this.attack = 0;
+			this.damage = 0;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -45,6 +47,7 @@
 			this.critBonus = 0;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0, 0, 0, 0, 0, 0, 0, 0);
 			
 			this.version = this._latestVersion;
 		}
@@ -137,7 +140,6 @@
 						kGAMECLASS.output(target.cockTypeLockedMessage());
 					}
 				}
-				
 				if(pc.hasCock() && pc.hasStatusEffect("Genital Slit") && changes < changeLimit && rand(3) == 0)
 				{
 					kGAMECLASS.output("\n\nYou feel [pc.eachCock] come spilling out of ");
@@ -146,21 +148,8 @@
 					kGAMECLASS.output(" container as the container itself begins to feel tight. Soon it vanishes entirely, leaving your ");
 					if(pc.cockTotal() == 1) kGAMECLASS.output("dick");
 					else kGAMECLASS.output("dicks");
-					kGAMECLASS.output(" hanging free like a human’s. <b>You have lost your genital slit!</b>");
+					kGAMECLASS.output(" hanging free like a human’s.");
 					pc.removeStatusEffect("Genital Slit");
-				}
-				
-				if (pc.hasStatusEffect("Vanae Markings") && changes < changeLimit && rand(6) == 0)
-				{
-					kGAMECLASS.output("\n\nYou feel your [pc.skinNoun] tingle and notice the " + pc.skinAccent + " swirls decorating your form starting to dissolve and fade. It doesn't take long until your");
-					
-					var ss:String = pc.skinFurScales();
-					
-					if (ss.charAt(ss.length - 1) == "s") kGAMECLASS.output(" " + ss + " are");
-					else kGAMECLASS.output(" " + ss + " is");
-					
-					kGAMECLASS.output(" bare of the intricate designs. <b>You have lost your body markings!</b>");
-					pc.removeStatusEffect("Vanae Markings");
 				}
 
 				//Feminine TFs
@@ -331,7 +320,6 @@
 					}
 					else kGAMECLASS.output(pc.hairTypeLockedMessage());
 				}
-				
 				//Lose "Mane" Perk:
 				if(pc.hasHair() && pc.hasPerk("Mane") && changes < changeLimit && rand(3) == 0)
 				{

@@ -6,7 +6,6 @@ package classes.GameData.Pregnancy.Handlers
 	import classes.kGAMECLASS;
 	import classes.PregnancyData;
 	import classes.rand;
-	import classes.GLOBAL;
 	
 	/**
 	 * ...
@@ -30,7 +29,6 @@ package classes.GameData.Pregnancy.Handlers
 			_canFertilizeEggs = false;
 			_pregnancyQuantityMinimum = 4;
 			_pregnancyQuantityMaximum = 7;
-			_pregnancyChildType = GLOBAL.CHILD_TYPE_SEED;
 			
 			onTryImpregnate = VenusPitcherSeedCarrierPregnancyHandler.seedCarrierOnTryImpregnate;
 			onSuccessfulImpregnation = VenusPitcherSeedCarrierPregnancyHandler.seedCarrierOnSuccessfulImpregnation;

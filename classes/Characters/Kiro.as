@@ -1,9 +1,8 @@
-﻿package classes.Characters 
+package classes.Characters 
 {
 	import classes.Creature;
 	import classes.GLOBAL;
 	import classes.kGAMECLASS;
-	import classes.StorageClass;
 	import classes.Items.Melee.ShockBlade;
 	import classes.Items.Guns.HammerCarbine;
 	import classes.Items.Protection.JoyCoPremiumShield;
@@ -21,7 +20,7 @@
 	{
 		public function Kiro() 
 		{
-			this._latestVersion = 3;
+			this._latestVersion = 1;
 			this.version = this._latestVersion;
 			this._neverSerialize = false;
 			
@@ -33,15 +32,16 @@
 			this.customDodge = "Kiro casually sidesteps out of the way";
 			this.customBlock = "Obvious placeholder is obvious.";
 			this.plural = false;
+			this.lustVuln = 1;
 			
 			this.meleeWeapon = new ShockBlade();
 			this.meleeWeapon.hasRandomProperties = true;
-			meleeWeapon.baseDamage.electric.damageValue = 3;
+			this.meleeWeapon.damage = 3;
 			
 			this.rangedWeapon = new HammerCarbine();
 			this.rangedWeapon.hasRandomProperties = true;
 			this.rangedWeapon.attackVerb = "shot";
-			rangedWeapon.baseDamage.kinetic.damageValue = 3;
+			this.rangedWeapon.damage = 3;
 			
 			this.armor.longName = "armor";
 			this.armor.defense = 3;
@@ -60,7 +60,7 @@
 			this.HPRaw = this.HPMax();
 			this.energyRaw = 100;
 			this.lustRaw = 15;
-			
+			this.resistances = new Array(1,1,1,1,1,1,1,1);
 			this.XPRaw = 500;
 			
 			this.credits = 1200;
@@ -140,7 +140,7 @@
 			//No dicks here!
 			this.cocks = new Array();
 			this.createCock();
-			this.cocks[0].cThicknessRatioRaw = 1;
+			this.cocks[0].cThicknessRatioRaw = 3.5;
 			this.cocks[0].cLengthRaw = 21;
 			this.cocks[0].cType = GLOBAL.TYPE_EQUINE;
 			this.cocks[0].cockFlags = [GLOBAL.FLAG_FLARED, GLOBAL.FLAG_SHEATHED, GLOBAL.FLAG_BLUNT]
@@ -151,7 +151,6 @@
 			this.vaginas[0].hymen = true;
 			this.vaginas[0].wetnessRaw = 2;
 			this.vaginas[0].loosenessRaw = 2;
-			this.vaginas[0].vaginaColor = "black";
 			this.vaginas[0].vagooFlags = [];
 			
 			//balls
@@ -161,7 +160,7 @@
 			//Multiplicative value used for impregnation odds. 0 is infertile. Higher is better.
 			this.cumQualityRaw = 0;
 			this.cumType = GLOBAL.FLUID_TYPE_CUM;
-			this.ballSizeRaw = 10;
+			this.ballSizeRaw = 3;
 			this.ballFullness = 100;
 			
 			//How many "normal" orgams worth of jizz your balls can hold.
@@ -191,29 +190,6 @@
 			this.ass.loosenessRaw = 1;
 		}
 		
-		public function UpgradeVersion1(d:Object):void
-		{
-			delete d.armor;
-			delete d.meleeWeapon;
-			delete d.rangedWeapon;
-			delete d.lustVuln;
-			delete d.resistances;
-			delete d.bonusResistances;
-			delete d.bonusLustVuln;
-		}
-		public function UpgradeVersion2(d:Object):void
-		{
-			var se:StorageClass = new StorageClass();
-			se.storageName = "Nuki Drunk";
-
-			d.perks.push(se.getSaveObject());
-			d.perks.sortOn("storageName", Array.CASEINSENSITIVE);
-		}
-		//Gotta reset 'dem balls!'
-		override public function orgasm(): void {
-			super.orgasm();
-			ballSizeRaw = 10;
-		}
 	}
 
 }

@@ -4,8 +4,6 @@
 	import classes.GLOBAL;
 	import classes.GameData.TooltipManager;
 	import classes.StringUtil;
-	import classes.Engine.Combat.DamageTypes.TypeCollection;
-	import classes.Engine.Combat.DamageTypes.DamageFlag;
 	
 	public class HammerPistol extends ItemSlotClass
 	{
@@ -38,11 +36,8 @@
 			//Information
 			this.basePrice = 2000;
 			this.attack = 0;
-			
-			baseDamage = new TypeCollection();
-			baseDamage.kinetic.damageValue = 9;
-			baseDamage.addFlag(DamageFlag.BULLET);
-			
+			this.damage = 9;
+			this.damageType = GLOBAL.KINETIC;
 			this.defense = 0;
 			this.shieldDefense = 0;
 			this.shields = 0;
@@ -50,6 +45,7 @@
 			this.critBonus = 2;
 			this.evasion = 0;
 			this.fortification = 0;
+			this.bonusResistances = new Array(0,0,0,0,0,0,0,0);
 
 			this.version = _latestVersion;
 		}

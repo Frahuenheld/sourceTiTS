@@ -1,4 +1,4 @@
-﻿package classes.Engine.Utility
+package classes.Engine.Utility
 {
 	import classes.kGAMECLASS;
 	import classes.StringUtil;
@@ -18,4 +18,5 @@
 		
 		return pName;
 	}
+
 }
